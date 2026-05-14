@@ -27,19 +27,8 @@ escalation_log = []
 
 TOOLS = [
     {
-        "name": "search_knowledge_base",
-        "description": "Search the company knowledge base, product catalogue, and FAQ. Always call this first before answering any question about products, pricing, ingredients, policies, or orders.",
-        "input_schema": {
-            "type": "object",
-            "properties": {
-                "query": {"type": "string"}
-            },
-            "required": ["query"]
-        }
-    },
-    {
         "name": "create_ticket",
-        "description": "Create a support ticket. Only call after collecting the customer's name, email, and order number. The customer will receive a confirmation email automatically.",
+        "description": "Create a support ticket. Only call after collecting the customer's name, email, and order number. Fires a Slack alert, emails the business owner, and sends the customer a confirmation email automatically.",
         "input_schema": {
             "type": "object",
             "properties": {
@@ -47,7 +36,9 @@ TOOLS = [
                 "priority": {"type": "string", "enum": ["low", "normal", "high", "urgent"]},
                 "category": {
                     "type": "string",
-                    "enum": ["Order & Shipping", "Returns & Refunds", "Product Inquiry", "Skin Concern", "Account & Loyalty", "Purchase Intent", "Escalation", "General"],
+                    "enum": ["Order & Shipping", "Returns & Refunds", "Product Inquiry",
+                             "Skin Concern", "Account & Loyalty", "Purchase Intent",
+                             "Escalation", "General"],
                     "description": "Category that best describes the issue"
                 },
                 "customer_name": {"type": "string"},
@@ -59,7 +50,7 @@ TOOLS = [
     },
     {
         "name": "send_purchase_email",
-        "description": "Use when a customer wants to purchase a specific product. Collect their name and email first, then call this to send them a purchase email and notify the team. Do NOT use create_ticket for purchases — use this instead.",
+        "description": "Send a purchase email to a customer who wants to buy a product. Collect their name and email first, then call this. Do NOT use create_ticket for purchases.",
         "input_schema": {
             "type": "object",
             "properties": {
@@ -75,7 +66,7 @@ TOOLS = [
     },
     {
         "name": "escalate_to_human",
-        "description": "Escalate to a human agent immediately. Use when the customer is frustrated, upset, or when two knowledge base searches have not resolved the issue.",
+        "description": "Escalate to a human agent. Use when the customer is frustrated, upset, or you cannot resolve the issue.",
         "input_schema": {
             "type": "object",
             "properties": {
@@ -89,17 +80,6 @@ TOOLS = [
 # ─────────────────────────────────────────────
 # TOOL IMPLEMENTATIONS
 # ─────────────────────────────────────────────
-
-def search_knowledge_base(query: str) -> str:
-    _, content = get_active_document()
-    if not content:
-        return "No knowledge base loaded."
-    query_lower = query.lower()
-    lines = [l for l in content.splitlines() if query_lower in l.lower()]
-    if lines:
-        return "\n".join(lines)
-    return "No exact match found. Try rephrasing or ask the customer for more details."
-
 
 def create_ticket(issue: str, priority: str = "normal", category: str = "General",
                   customer_name: str = "Unknown", customer_email: str = "Unknown",
@@ -115,55 +95,48 @@ def create_ticket(issue: str, priority: str = "normal", category: str = "General
         "order_number": order_number,
         "timestamp": datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC"),
     })
-    # Google Sheets
     try:
         from integrations.sheets import log_ticket
         log_ticket(ticket_id, issue, priority, customer_name, customer_email, order_number, category)
     except Exception as e:
         print(f"[sheets] {e}")
-    # Email → business owner
     try:
         from integrations.email_notify import send_ticket_email
         send_ticket_email(ticket_id, issue, priority, customer_name, customer_email, order_number)
     except Exception as e:
         print(f"[email-owner] {e}")
-    # Email → customer confirmation
     try:
         from integrations.email_notify import send_customer_confirmation_email
         send_customer_confirmation_email(ticket_id, issue, priority, customer_name, customer_email)
     except Exception as e:
         print(f"[email-customer] {e}")
-    # Slack
     try:
         from integrations.slack_alert import send_ticket_alert
         send_ticket_alert(ticket_id, issue, priority, customer_name, customer_email, order_number)
     except Exception as e:
         print(f"[slack-ticket] {e}")
-    return f"Ticket {ticket_id} created successfully. A confirmation email has been sent to {customer_email}. Our team will respond within 24 hours."
+    return f"Ticket {ticket_id} created. Confirmation email sent to {customer_email}. Our team will respond within 24 hours."
 
 
 def send_purchase_email(customer_name: str, customer_email: str, product_name: str,
                         product_price: str, product_sku: str, product_description: str = "") -> str:
     ref_id = f"PUR-{str(uuid.uuid4())[:6].upper()}"
-    # Email → customer
     try:
         from integrations.email_notify import send_purchase_email as _send_purchase
         _send_purchase(customer_name, customer_email, product_name, product_price, product_sku, product_description)
     except Exception as e:
         print(f"[email-purchase] {e}")
-    # Slack
     try:
         from integrations.slack_alert import send_purchase_alert
         send_purchase_alert(customer_name, customer_email, product_name, product_price, product_sku)
     except Exception as e:
         print(f"[slack-purchase] {e}")
-    # Sheets
     try:
         from integrations.sheets import log_purchase
         log_purchase(ref_id, customer_name, customer_email, product_name, product_price, product_sku)
     except Exception as e:
         print(f"[sheets-purchase] {e}")
-    return f"A purchase email has been sent to {customer_email} with a link to complete their order for {product_name}. Reference: {ref_id}."
+    return f"Purchase email sent to {customer_email} for {product_name}. Reference: {ref_id}."
 
 
 def escalate_to_human(reason: str) -> str:
@@ -176,11 +149,10 @@ def escalate_to_human(reason: str) -> str:
         send_escalation_alert(reason)
     except Exception as e:
         print(f"[slack-escalation] {e}")
-    return "I'm connecting you with a human agent right now. Average wait time is under 3 minutes. They will have the full context of our conversation."
+    return "I'm connecting you with a human agent right now. They will have the full context of our conversation."
 
 
 TOOL_MAP = {
-    "search_knowledge_base": search_knowledge_base,
     "create_ticket": create_ticket,
     "send_purchase_email": send_purchase_email,
     "escalate_to_human": escalate_to_human,
@@ -190,65 +162,56 @@ TOOL_MAP = {
 # SYSTEM PROMPT
 # ─────────────────────────────────────────────
 
-SYSTEM_BASE = """\
-You are {agent_name}, a warm, knowledgeable customer support and sales specialist for {company_name}, a premium skincare brand.
+SYSTEM = """\
+You are {agent_name}, a friendly and professional customer support agent for {company_name}, a premium skincare brand.
 
-PERSONALITY: Polished, empathetic, and confident. You represent a luxury brand — be warm but professional. You are also a product expert who genuinely loves skincare and can make great recommendations.
+YOUR JOB:
+1. Chat warmly and helpfully with customers
+2. For any support issue → collect name, email, order number → create_ticket
+3. For purchase requests → collect name and email → send_purchase_email
+4. If the customer is upset or you can't help → escalate_to_human
 
-PROCESS:
-1. Greet the customer and understand their need
-2. Always search the knowledge base before answering ANY question (products, prices, ingredients, policies, routines)
-3. For support issues: answer clearly and ask if it resolved their concern. If not, collect name + email + order number then create_ticket.
-4. For product questions: recommend confidently based on skin type, concern, and budget. If they want to buy, collect name + email then use send_purchase_email.
-5. If the customer is frustrated or upset → escalate_to_human immediately.
+TICKET FLOW:
+- Understand the problem first
+- Ask for: full name, email address, order number (say N/A if no order)
+- Read back their details: "Just to confirm — Name: X, Email: Y, Order: Z. Is that correct?"
+- Only call create_ticket after they confirm
+- Tell them a confirmation email has been sent
 
-TICKET RULES:
-- Never call create_ticket until you have: full name, email, and order number (or confirmed N/A)
-- Always read back their details before submitting and ask "Does everything look correct?"
-- After ticket is created, tell them they'll receive a confirmation email
+PURCHASE FLOW:
+- Ask what product they want to buy
+- Ask for their name and email
+- Confirm: "I'll send a purchase email for [product] at [price] to [email]. Does that look right?"
+- Call send_purchase_email — NOT create_ticket
 
-PURCHASE RULES:
-- When a customer wants to buy a product, ask for their name and email only (no order number needed)
-- Use send_purchase_email — NOT create_ticket — for purchases
-- Confirm what they're buying and the price before sending
+OUR PRODUCTS:
+- Vitamin C Glow Serum — $68 (SKU: LUM-VC-001) — brightens skin, fades dark spots
+- Retinol Night Cream — $78 (SKU: LUM-RT-002) — anti-ageing, reduces fine lines
+- Hydra-Calm Cleanser — $38 (SKU: LUM-HC-003) — gentle daily cleanser, all skin types
+- Moisture Surge Moisturiser — $58 (SKU: LUM-MS-004) — 72-hour hydration
+- SPF 50 Glow Shield — $45 (SKU: LUM-SP-005) — broad spectrum SPF50
+- Renewal Eye Cream — $65 (SKU: LUM-EC-006) — reduces dark circles and puffiness
+- Royal Honey Mask — $52 (SKU: LUM-RH-007) — deep nourishing weekly mask
+- AHA Resurfacing Toner — $42 (SKU: LUM-AH-008) — exfoliates, smooths texture
+- Bakuchiol Balancing Serum — $72 (SKU: LUM-BB-009) — natural retinol alternative, sensitive skin
+- Ceramide Barrier Cream — $55 (SKU: LUM-CB-010) — repairs and strengthens skin barrier
+- Niacinamide Clarity Serum — $48 (SKU: LUM-NI-011) — minimises pores, controls oil, oily/acne skin
 
-PRODUCT EXPERTISE:
-- You know every product in the catalogue including SKU, price, ingredients, and skin type suitability
-- Make confident recommendations based on skin type and concerns
-- Suggest complementary products and routines
-- Mention current bundles if relevant
-
-PRODUCT DISPLAY FORMAT:
-NEVER use markdown tables to display products — they break in chat interfaces.
-Instead, display each product as a card block using this EXACT format:
-
-[PRODUCT]
-name: Product Name
-price: $XX.00
-sku: LUM-XX-000
-tag: Best for oily skin · Anti-ageing
-desc: One sentence about what it does.
-[/PRODUCT]
-
-Show up to 4 products maximum per response. After the product cards, add a short
-1–2 sentence follow-up (e.g. routine suggestion, bundle mention, or offer to help buy).
-
-QUICK REPLY SUGGESTIONS:
-After each response (except while collecting customer details), add a line:
-QUICK_REPLIES: Short option | Short option | Short option
-Keep each under 32 characters. Match them to the topic just discussed.
-Examples by topic:
-- Shipping: QUICK_REPLIES: Track my order | Express shipping | Free shipping info
-- Returns: QUICK_REPLIES: Start a return | Refund timeline | Exchange an item
-- Product advice: QUICK_REPLIES: View full routine | Check ingredients | I'd like to buy this
-- After ticket: QUICK_REPLIES: Ask another question | Track my order | Speak to a human
-- After purchase email: QUICK_REPLIES: Ask about ingredients | Build my routine | More products"""
+QUICK REPLIES:
+After every response add one line: QUICK_REPLIES: Option 1 | Option 2 | Option 3
+Keep each option under 32 characters. Match to the current topic.
+Examples:
+- General: QUICK_REPLIES: I have an issue | I want to buy | Speak to a human
+- After ticket: QUICK_REPLIES: Ask another question | Speak to a human | Track my order
+- After purchase: QUICK_REPLIES: Buy another product | I have a question | Thank you
+- Browsing products: QUICK_REPLIES: I'd like to buy this | Tell me more | See other products"""
 
 
 def build_system_prompt() -> str:
     agent_name = os.getenv("AGENT_NAME", "Alex")
     company_name = os.getenv("COMPANY_NAME", "Lumière")
-    return SYSTEM_BASE.format(agent_name=agent_name, company_name=company_name)
+    return SYSTEM.format(agent_name=agent_name, company_name=company_name)
+
 
 # ─────────────────────────────────────────────
 # ROUTES
@@ -261,7 +224,6 @@ def health():
 
 @app.route("/")
 def index():
-    # Reuse existing session if valid, create new one otherwise
     sid = session.get("id")
     if not sid or sid not in conversations:
         sid = str(uuid.uuid4())
@@ -292,13 +254,13 @@ def chat():
 
         history.append({"role": "user", "content": user_message})
 
-        # Keep only the last 10 messages to prevent token blowup
+        # Keep only the last 10 messages to stay within token limits
         trimmed = history[-10:] if len(history) > 10 else history
 
-        for _ in range(8):
+        for _ in range(6):
             response = client.messages.create(
-                model="claude-sonnet-4-6",
-                max_tokens=1024,
+                model="claude-haiku-3-5",
+                max_tokens=600,
                 system=[{
                     "type": "text",
                     "text": build_system_prompt(),
@@ -329,14 +291,13 @@ def chat():
                     if block.type == "tool_use":
                         tool_fn = TOOL_MAP.get(block.name)
                         if tool_fn is None:
-                            print(f"[chat] unknown tool requested: {block.name}")
                             result = f"Tool '{block.name}' is not available."
                         else:
                             try:
                                 result = tool_fn(**block.input)
                             except Exception as tool_err:
                                 print(f"[chat] tool '{block.name}' raised: {tool_err}")
-                                result = f"There was an issue running {block.name}. Please continue."
+                                result = f"There was an issue running {block.name}. Please try again."
                         tool_results.append({
                             "type": "tool_result",
                             "tool_use_id": block.id,
@@ -344,11 +305,11 @@ def chat():
                         })
                 history.append({"role": "user", "content": tool_results})
 
-        return jsonify({"reply": "I'm having a little trouble right now. Please try again or contact us at support@lumiereskin.com.", "suggestions": []})
+        return jsonify({"reply": "I'm having a little trouble right now. Please try again in a moment.", "suggestions": []})
 
     except anthropic.RateLimitError:
-        print("[chat] rate limit hit — too many tokens per minute")
-        return jsonify({"reply": "I'm receiving a lot of messages right now — please give me a moment and try again.", "suggestions": []}), 200
+        print("[chat] rate limit hit")
+        return jsonify({"reply": "I'm very busy right now — please give me a moment and try again.", "suggestions": []}), 200
     except Exception as e:
         print(f"[chat] unhandled error: {e}")
         import traceback; traceback.print_exc()
