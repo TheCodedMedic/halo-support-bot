@@ -242,19 +242,13 @@ Examples by topic:
 - Returns: QUICK_REPLIES: Start a return | Refund timeline | Exchange an item
 - Product advice: QUICK_REPLIES: View full routine | Check ingredients | I'd like to buy this
 - After ticket: QUICK_REPLIES: Ask another question | Track my order | Speak to a human
-- After purchase email: QUICK_REPLIES: Ask about ingredients | Build my routine | More products
-{kb_section}"""
+- After purchase email: QUICK_REPLIES: Ask about ingredients | Build my routine | More products"""
 
 
 def build_system_prompt() -> str:
     agent_name = os.getenv("AGENT_NAME", "Alex")
     company_name = os.getenv("COMPANY_NAME", "Lumière")
-    _, kb_content = get_active_document()
-    if kb_content:
-        kb_section = f"\nKNOWLEDGE BASE:\n{kb_content}"
-    else:
-        kb_section = "\nNo knowledge base loaded. Use general skincare knowledge and support best practices."
-    return SYSTEM_BASE.format(agent_name=agent_name, company_name=company_name, kb_section=kb_section)
+    return SYSTEM_BASE.format(agent_name=agent_name, company_name=company_name)
 
 # ─────────────────────────────────────────────
 # ROUTES
