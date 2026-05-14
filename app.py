@@ -283,54 +283,72 @@ def index():
 
 @app.route("/chat", methods=["POST"])
 def chat():
-    sid = session.get("id")
-    if not sid or sid not in conversations:
-        sid = str(uuid.uuid4())
-        session["id"] = sid
-        session.permanent = True
-        conversations[sid] = []
-    history = conversations[sid]
+    try:
+        sid = session.get("id")
+        if not sid or sid not in conversations:
+            sid = str(uuid.uuid4())
+            session["id"] = sid
+            session.permanent = True
+            conversations[sid] = []
+        history = conversations[sid]
 
-    user_message = request.json.get("message", "")
-    history.append({"role": "user", "content": user_message})
+        user_message = request.json.get("message", "")
+        if not user_message:
+            return jsonify({"reply": "I didn't catch that — could you try again?", "suggestions": []})
 
-    for _ in range(8):
-        response = client.messages.create(
-            model="claude-sonnet-4-6",
-            max_tokens=1024,
-            system=build_system_prompt(),
-            tools=TOOLS,
-            messages=history
-        )
+        history.append({"role": "user", "content": user_message})
 
-        if response.stop_reason == "end_turn":
-            reply = next((b.text for b in response.content if hasattr(b, "text")), "")
-            history.append({"role": "assistant", "content": reply})
-            suggestions = []
-            clean_lines = []
-            for line in reply.splitlines():
-                if line.strip().startswith("QUICK_REPLIES:"):
-                    raw = line.replace("QUICK_REPLIES:", "").strip()
-                    suggestions = [s.strip() for s in raw.split("|") if s.strip()]
-                else:
-                    clean_lines.append(line)
-            clean_reply = "\n".join(clean_lines).strip()
-            return jsonify({"reply": clean_reply, "suggestions": suggestions})
+        for _ in range(8):
+            response = client.messages.create(
+                model="claude-sonnet-4-6",
+                max_tokens=1024,
+                system=build_system_prompt(),
+                tools=TOOLS,
+                messages=history
+            )
 
-        if response.stop_reason == "tool_use":
-            history.append({"role": "assistant", "content": response.content})
-            tool_results = []
-            for block in response.content:
-                if block.type == "tool_use":
-                    result = TOOL_MAP[block.name](**block.input)
-                    tool_results.append({
-                        "type": "tool_result",
-                        "tool_use_id": block.id,
-                        "content": result
-                    })
-            history.append({"role": "user", "content": tool_results})
+            if response.stop_reason == "end_turn":
+                reply = next((b.text for b in response.content if hasattr(b, "text")), "")
+                history.append({"role": "assistant", "content": reply})
+                suggestions = []
+                clean_lines = []
+                for line in reply.splitlines():
+                    if line.strip().startswith("QUICK_REPLIES:"):
+                        raw = line.replace("QUICK_REPLIES:", "").strip()
+                        suggestions = [s.strip() for s in raw.split("|") if s.strip()]
+                    else:
+                        clean_lines.append(line)
+                clean_reply = "\n".join(clean_lines).strip()
+                return jsonify({"reply": clean_reply, "suggestions": suggestions})
 
-    return jsonify({"reply": "I'm having a little trouble right now. Please try again or contact us at support@lumiereskin.com.", "suggestions": []})
+            if response.stop_reason == "tool_use":
+                history.append({"role": "assistant", "content": response.content})
+                tool_results = []
+                for block in response.content:
+                    if block.type == "tool_use":
+                        tool_fn = TOOL_MAP.get(block.name)
+                        if tool_fn is None:
+                            print(f"[chat] unknown tool requested: {block.name}")
+                            result = f"Tool '{block.name}' is not available."
+                        else:
+                            try:
+                                result = tool_fn(**block.input)
+                            except Exception as tool_err:
+                                print(f"[chat] tool '{block.name}' raised: {tool_err}")
+                                result = f"There was an issue running {block.name}. Please continue."
+                        tool_results.append({
+                            "type": "tool_result",
+                            "tool_use_id": block.id,
+                            "content": result
+                        })
+                history.append({"role": "user", "content": tool_results})
+
+        return jsonify({"reply": "I'm having a little trouble right now. Please try again or contact us at support@lumiereskin.com.", "suggestions": []})
+
+    except Exception as e:
+        print(f"[chat] unhandled error: {e}")
+        import traceback; traceback.print_exc()
+        return jsonify({"reply": "Something went wrong on my end. Please try again in a moment.", "suggestions": []}), 200
 
 
 # ─────────────────────────────────────────────
