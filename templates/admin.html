@@ -142,13 +142,16 @@
     <h2>Recent Tickets</h2>
     {% if ticket_log %}
       <table>
-        <thead><tr><th>Ticket ID</th><th>Priority</th><th>Issue</th><th>Time</th></tr></thead>
+        <thead><tr><th>Ticket ID</th><th>Customer</th><th>Email</th><th>Order</th><th>Priority</th><th>Issue</th><th>Time</th></tr></thead>
         <tbody>
           {% for t in ticket_log | reverse %}
           <tr>
             <td>{{ t.ticket_id }}</td>
+            <td>{{ t.get('customer_name', '—') }}</td>
+            <td>{{ t.get('customer_email', '—') }}</td>
+            <td>{{ t.get('order_number', '—') }}</td>
             <td><span class="badge badge-{{ t.priority }}">{{ t.priority }}</span></td>
-            <td>{{ t.issue[:80] }}{% if t.issue | length > 80 %}…{% endif %}</td>
+            <td>{{ t.issue[:60] }}{% if t.issue | length > 60 %}…{% endif %}</td>
             <td>{{ t.timestamp }}</td>
           </tr>
           {% endfor %}

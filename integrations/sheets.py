@@ -2,7 +2,7 @@ import os
 import json
 from datetime import datetime
 
-SHEET_HEADERS = ["Ticket ID", "Customer Message", "Priority", "Status", "Timestamp"]
+SHEET_HEADERS = ["Ticket ID", "Customer Name", "Customer Email", "Order Number", "Issue", "Priority", "Status", "Timestamp"]
 
 
 def _get_sheet():
@@ -39,12 +39,17 @@ def _get_sheet():
     return worksheet
 
 
-def log_ticket(ticket_id: str, customer_message: str, priority: str) -> None:
+def log_ticket(ticket_id: str, issue: str, priority: str,
+               customer_name: str = "Unknown", customer_email: str = "Unknown",
+               order_number: str = "N/A") -> None:
     """Append a ticket row to the Google Sheet. Raises on failure."""
     worksheet = _get_sheet()
     row = [
         ticket_id,
-        customer_message,
+        customer_name,
+        customer_email,
+        order_number,
+        issue,
         priority,
         "Open",
         datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC"),

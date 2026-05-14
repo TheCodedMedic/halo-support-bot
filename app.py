@@ -29,14 +29,17 @@ TOOLS = [
     },
     {
         "name": "create_ticket",
-        "description": "Create a support ticket for issues that need follow-up. Use when the knowledge base has no answer.",
+        "description": "Create a support ticket. Only call this after you have collected the customer's name, email, and order number (if relevant). Never call this before asking for those details.",
         "input_schema": {
             "type": "object",
             "properties": {
-                "issue": {"type": "string"},
-                "priority": {"type": "string", "enum": ["low", "normal", "high", "urgent"]}
+                "issue": {"type": "string", "description": "Full description of the customer's problem"},
+                "priority": {"type": "string", "enum": ["low", "normal", "high", "urgent"]},
+                "customer_name": {"type": "string"},
+                "customer_email": {"type": "string"},
+                "order_number": {"type": "string", "description": "Order number if relevant, otherwise 'N/A'"}
             },
-            "required": ["issue", "priority"]
+            "required": ["issue", "priority", "customer_name", "customer_email", "order_number"]
         }
     },
     {
@@ -63,26 +66,30 @@ def search_knowledge_base(query: str) -> str:
     # Fall back to returning the full document so the agent can scan it
     return content
 
-def create_ticket(issue: str, priority: str = "normal") -> str:
+def create_ticket(issue: str, priority: str = "normal", customer_name: str = "Unknown",
+                  customer_email: str = "Unknown", order_number: str = "N/A") -> str:
     from datetime import datetime
     ticket_id = f"TKT-{str(uuid.uuid4())[:6].upper()}"
     ticket_log.append({
         "ticket_id": ticket_id,
         "issue": issue,
         "priority": priority,
+        "customer_name": customer_name,
+        "customer_email": customer_email,
+        "order_number": order_number,
         "timestamp": datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC"),
     })
     try:
         from integrations.sheets import log_ticket
-        log_ticket(ticket_id, issue, priority)
+        log_ticket(ticket_id, issue, priority, customer_name, customer_email, order_number)
     except Exception as e:
         print(f"[sheets] failed to log ticket: {e}")
     try:
         from integrations.email_notify import send_ticket_email
-        send_ticket_email(ticket_id, issue, priority)
+        send_ticket_email(ticket_id, issue, priority, customer_name, customer_email, order_number)
     except Exception as e:
         print(f"[email] failed to send notification: {e}")
-    return f"Ticket {ticket_id} created with {priority} priority. Our team will respond within 24 hours."
+    return f"Ticket {ticket_id} created with {priority} priority. Our team will be in touch at {customer_email} within 24 hours."
 
 def escalate_to_human(reason: str) -> str:
     from datetime import datetime
@@ -104,21 +111,26 @@ TOOL_MAP = {
 }
 
 SYSTEM_BASE = """\
-You are {agent_name}, a friendly customer support agent for {company_name}.
+You are {agent_name}, a warm and knowledgeable customer support specialist for {company_name}, a premium skincare brand.
 
-PERSONALITY: Warm, helpful, and concise. Get to the answer quickly.
+PERSONALITY: Polished, empathetic, and efficient. You represent a luxury brand — be warm but professional. Never rushed.
 
 PROCESS:
-1. Understand the customer's issue
-2. Search the knowledge base first
-3. If found → give the answer and ask if resolved
-4. If not found → create a ticket
-5. If customer seems frustrated → escalate immediately
+1. Greet the customer and understand their issue
+2. Search the knowledge base before answering anything
+3. If the FAQ answers it → give a clear, friendly answer and ask if it helped
+4. If the issue needs follow-up (no FAQ answer, complex issue, or customer requests it):
+   a. Tell the customer you'll create a ticket for them
+   b. Ask for their full name, email address, and order number (say "N/A" if not order-related)
+   c. Only call create_ticket once you have all three
+5. If the customer is frustrated or upset → escalate to a human immediately, do not wait
 
 RULES:
-- Never make up information
-- Keep replies short — 2-3 sentences max
-- Always search before saying you don't know
+- Never make up product information — always search first
+- Keep replies concise — 2-4 sentences unless explaining a complex issue
+- Always confirm the customer's email back to them before submitting a ticket
+- Use the customer's name once you have it
+- Never ask for payment details or passwords
 {kb_section}"""
 
 
