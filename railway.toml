@@ -1,4 +1,4 @@
 [deploy]
-startCommand = "gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120 --log-level debug"
+startCommand = "gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120 --preload --log-level info"
 healthcheckPath = "/health"
-healthcheckTimeout = 30
+healthcheckTimeout = 60
