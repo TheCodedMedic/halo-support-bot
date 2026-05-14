@@ -1,48 +1,105 @@
-Lumière Skincare — Complete Customer Support FAQ
+Lumière Skincare — Complete Customer Support Knowledge Base
+Version 3.0 | Last updated: 2026
 
 ================================================================
-ABOUT LUMIÈRE
+SECTION 1: ABOUT LUMIÈRE
 ================================================================
 
 What is Lumière?
 Lumière is a premium skincare brand founded in 2018, dedicated to crafting
 science-backed, clean beauty products that deliver visible results. Every
 formula is developed with leading dermatologists and tested on all skin types.
+Our name is the French word for "light" — because we believe great skin is
+radiant skin.
+
+Who founded Lumière?
+Lumière was founded by Dr. Isabelle Fontaine, a board-certified dermatologist
+with 20 years of clinical experience, and her business partner Marc Devereaux,
+a former cosmetic chemist at L'Oréal Research. Together they set out to bridge
+the gap between pharmaceutical efficacy and clean beauty values.
+
+What is Lumière's mission?
+Our mission is simple: deliver dermatologist-grade skincare results using only
+clean, ethically sourced ingredients — without compromise. We believe you should
+never have to choose between what works and what is safe.
 
 What makes Lumière different from other skincare brands?
 We combine pharmaceutical-grade active ingredients with clean, plant-based
 carriers. Our products are free from parabens, sulphates, synthetic fragrances,
 mineral oils, and microplastics. Every product undergoes 18 months of clinical
-testing before launch.
+testing before launch. We partner with independent dermatologists to validate
+every claim we make.
 
 Are Lumière products cruelty-free?
-Yes. Lumière is certified cruelty-free by Leaping Bunny. We never test on
-animals and do not sell in markets that require animal testing.
+Yes. Lumière is certified cruelty-free by both Leaping Bunny and PETA's Beauty
+Without Bunnies programme. We never test on animals at any stage of production,
+and we do not sell in markets that require animal testing by law.
 
 Are Lumière products vegan?
 95% of our range is vegan. The exceptions are our Renewal Eye Cream and Royal
-Honey Mask, which contain ethically sourced beeswax and honey. These products
-are clearly labelled on our website.
+Honey Mask, which contain ethically sourced beeswax and honey from certified
+sustainable apiaries in New Zealand. These products are clearly labelled on our
+website with a non-vegan icon.
 
 Are Lumière products suitable for sensitive skin?
 Yes. All products are dermatologist-tested and formulated for sensitive skin
 compatibility. We recommend patch testing any new product on your inner arm
-for 24-48 hours before full use. If you have a known allergy, review the full
-ingredient list on our website before purchasing.
+for 24–48 hours before full facial use. If you have a known allergy, review the
+full ingredient list on each product page before purchasing.
 
 Are Lumière products safe during pregnancy?
 We recommend consulting your doctor or dermatologist before using any skincare
-products during pregnancy. Our Vitamin C Glow Serum and Retinol Night Cream
-contain ingredients that are typically avoided during pregnancy. Our Hydra-Calm
-Cleanser, Moisture Surge Moisturiser, and SPF 50 Glow Shield are generally
-considered safe, but please always seek medical advice.
+during pregnancy. Products to avoid during pregnancy include our Vitamin C Glow
+Serum (high-dose L-ascorbic acid), Retinol Night Cream (retinol), and AHA
+Resurfacing Toner (glycolic acid). Our Hydra-Calm Cleanser, Moisture Surge
+Moisturiser, and SPF 50 Glow Shield are generally considered safe, but please
+always seek personalised medical advice.
+
+Are Lumière products safe for breastfeeding?
+Similar guidance applies to breastfeeding as pregnancy. Avoid retinol and
+high-dose active serums. Our gentle hydrating and cleansing products are
+typically considered safe. Consult your healthcare provider for personalised
+advice.
+
+Are Lumière products suitable for teenagers?
+Yes, with guidance. We recommend our Hydra-Calm Cleanser, Moisture Surge
+Moisturiser, and SPF 50 Glow Shield for teenagers. Active serums like Retinol
+Night Cream and AHA Toner are best introduced from age 18 with gradual
+introduction. Vitamin C serum is suitable from age 16.
+
+Are Lumière products safe for mature skin (60+)?
+Absolutely. Many of our products are specifically beneficial for mature skin,
+especially our Retinol Night Cream, Renewal Eye Cream, and Moisture Surge
+Moisturiser. The key is starting with lower frequencies and building up
+tolerance gradually.
 
 Where are Lumière products made?
 All Lumière products are formulated and manufactured in our GMP-certified
-facility in Lausanne, Switzerland. Our packaging is produced in Portugal.
+(Good Manufacturing Practice) facility in Lausanne, Switzerland. Our packaging
+is produced in Portugal using recycled and recyclable materials.
+
+Is Lumière a dermatologist brand?
+Yes. Our formulations are developed alongside a board of consulting
+dermatologists. However, Lumière is a retail skincare brand — we do not
+provide medical diagnoses or prescribe treatments. Always consult a licensed
+dermatologist for skin conditions requiring medical treatment.
+
+Does Lumière conduct clinical trials?
+Yes. Every product undergoes a minimum 18-month clinical testing programme
+before launch, including: RIPT (Repeat Insult Patch Test) for allergen safety,
+SPF testing (for sun protection products), independent efficacy trials with
+at least 50 participants, and dermatologist sign-off. Clinical data summaries
+are available on each product page.
+
+Has Lumière won any awards?
+Yes. Lumière has been recognised with:
+- Best Clean Skincare Brand — CEW Beauty Awards 2024
+- Editor's Choice — Allure Magazine 2023 and 2024
+- Best Serum — Harper's Bazaar Beauty Awards 2023 (Vitamin C Glow Serum)
+- Sustainability Leader — Positive Luxury Awards 2024
 
 ================================================================
-PRODUCTS & INGREDIENTS
+SECTION 2: PRODUCTS & HERO INGREDIENTS
 ================================================================
 
 What are your hero products?
@@ -54,60 +111,451 @@ What are your hero products?
 - Lumière Renewal Eye Cream — reduces dark circles and puffiness, peptide-enriched
 - Lumière Royal Honey Mask — weekly deep nourishment and repair treatment
 - Lumière AHA Resurfacing Toner — exfoliates and refines texture with 10% glycolic acid
+- Lumière Bakuchiol Balancing Serum — natural retinol alternative for sensitive skin
+- Lumière Ceramide Barrier Cream — intensive repair for compromised or dry skin
+- Lumière Niacinamide Clarity Serum — pore minimising and oil control
 
-What ingredients do you use?
+What key ingredients does Lumière use?
 Key actives across our range include:
-- Vitamin C (L-ascorbic acid) — brightening and antioxidant
-- Retinol (encapsulated) — anti-ageing and cell renewal
+- Vitamin C (L-ascorbic acid) — brightening and antioxidant protection
+- Retinol (encapsulated) — anti-ageing and accelerated cell renewal
 - Hyaluronic acid (3 molecular weights) — deep and surface hydration
 - Niacinamide — pore-minimising, oil control, barrier support
 - Peptides (Matrixyl 3000, Argireline) — firmness and fine line reduction
 - AHAs (glycolic and lactic acid) — exfoliation and texture refinement
-- Ceramides — barrier repair and protection
-- Bakuchiol — natural retinol alternative for sensitive skin
-- Centella Asiatica — soothing and redness reduction
-- Squalane — lightweight moisturisation and barrier support
+- Ceramides — barrier repair and skin protection
+- Bakuchiol — natural retinol alternative, gentle enough for sensitive skin
+- Centella Asiatica — soothing, redness reduction, and wound healing support
+- Squalane — lightweight moisturisation derived from sugarcane (not shark liver)
+- Vitamin E (tocopherol) — antioxidant and preservative synergist
+- Zinc PCA — sebum regulation and anti-bacterial
+- Azelaic acid — brightening and redness reduction (in select products)
+- Resveratrol — antioxidant protection (in Vitamin C Serum)
 
-Can I use the Vitamin C Serum and Retinol Night Cream together?
-Yes, but use them at different times of day. Apply the Vitamin C Glow Serum in
-the morning under your moisturiser and SPF. Apply the Retinol Night Cream in
-the evening. Do not layer them together as they can destabilise each other.
+VITAMIN C GLOW SERUM
+====================
 
-Can I use the AHA Toner every day?
-We recommend starting 2-3 times per week and building up to daily use over
-4-6 weeks as your skin adapts. Always use SPF during the day when using AHAs
-as they increase sun sensitivity. Do not use on the same evening as retinol.
+What does the Vitamin C Glow Serum do?
+It brightens skin tone, fades dark spots and hyperpigmentation, neutralises
+free radical damage from pollution and UV, and improves overall luminosity.
+Results are typically visible within 4–8 weeks of consistent daily use.
 
-What order should I apply my Lumière products?
-Morning: Cleanser → AHA Toner (if using) → Vitamin C Serum → Eye Cream →
-Moisturiser → SPF 50 Glow Shield.
-Evening: Cleanser → AHA Toner (if using, alternate with retinol nights) →
-Retinol Night Cream → Eye Cream → Moisturiser.
-Weekly: Royal Honey Mask after cleansing, before serum.
+What concentration of Vitamin C is in the serum?
+15% L-ascorbic acid — the clinically proven, most bioavailable form of
+Vitamin C. This is the upper effective range for home use without causing
+irritation in most skin types.
 
-Do your products contain fragrance?
-No synthetic fragrances. Some products contain naturally-derived botanical
-scents from ingredients like rosehip and bakuchiol. Full ingredient lists are
-available on each product page.
+Why does my Vitamin C Serum sting slightly on application?
+A mild tingling is normal, especially on first use, due to the low pH required
+for L-ascorbic acid to be effective. If the stinging is intense or prolonged
+(more than 30 seconds), dilute with a drop of moisturiser or reduce use to
+every other day. If stinging persists, discontinue and contact us.
 
-How long do Lumière products last once opened?
-Most products have a 12-month period after opening (PAO symbol on packaging).
-The Vitamin C Serum has a 6-month PAO due to the instability of L-ascorbic acid.
-Store in a cool, dry place away from direct sunlight for best results.
+My Vitamin C Serum has turned orange/brown. Is it still good?
+No. Oxidation causes the serum to darken from pale yellow to orange or brown.
+An oxidised serum has lost its efficacy and may cause breakouts or irritation.
+You should replace it. To extend serum life: store in a cool, dark place,
+ensure the lid is tightly closed after each use, and keep it away from
+bathrooms (humidity accelerates oxidation).
 
-My Vitamin C Serum has turned orange. Is it still good?
-Oxidation causes the serum to darken from pale yellow to orange or brown.
-An oxidised serum loses its efficacy and should be replaced. To prevent this,
-store in a dark, cool place and ensure the lid is tightly closed after each use.
+How long does the Vitamin C Serum last once opened?
+6 months from opening (PAO symbol on packaging). This is shorter than our other
+products due to the inherent instability of L-ascorbic acid.
+
+Can I use Vitamin C Serum around my eyes?
+Apply up to, but not directly on, the eye area. For targeted eye treatment, use
+our Renewal Eye Cream. Avoid getting serum directly in the eyes.
+
+RETINOL NIGHT CREAM
+===================
+
+What does the Retinol Night Cream do?
+It accelerates cell turnover, reduces the appearance of fine lines and wrinkles,
+improves skin texture, fades dark spots, and stimulates collagen production.
+Clinical studies show visible improvement in 12 weeks of consistent use.
+
+What percentage of retinol is in the Night Cream?
+0.5% encapsulated retinol. Encapsulation means the retinol is released slowly
+over several hours, dramatically reducing irritation compared to unencapsulated
+forms, while maintaining efficacy.
+
+How should I introduce the Retinol Night Cream?
+Week 1–2: Apply every third night.
+Week 3–4: Apply every other night.
+Week 5+: Apply every night if tolerated.
+Always apply to dry skin (wait 10–15 minutes after cleansing to reduce
+irritation) and follow with moisturiser.
+
+Is skin purging normal with retinol?
+Yes. Purging can occur in the first 2–6 weeks as cell turnover accelerates.
+It may look like increased breakouts, mild flaking, or dryness. This is
+temporary. If purging is severe or persists beyond 8 weeks, discontinue use
+and contact us. To minimise: start slowly, use a gentle cleanser, and always
+moisturise after application.
+
+Can I use retinol in summer?
+Yes, but with diligence. Retinol increases photosensitivity. Always wear SPF 30+
+(we recommend SPF 50 Glow Shield) every morning when using retinol, year-round.
+Apply retinol in the evening only — never in the morning.
+
+Can I use retinol with Vitamin C?
+Yes, but not at the same time. Apply Vitamin C Glow Serum in the morning and
+Retinol Night Cream in the evening. Layering them together can destabilise both
+actives and may cause irritation.
+
+HYDRA-CALM CLEANSER
+====================
+
+What skin types is the Hydra-Calm Cleanser suitable for?
+All skin types, with particular benefit for sensitive, dry, reactive, and
+eczema-prone skin. It removes makeup and impurities without stripping the
+skin's natural moisture barrier.
+
+Does the Hydra-Calm Cleanser remove waterproof makeup?
+It removes light to moderate makeup effectively. For heavy or waterproof
+makeup, we recommend a pre-cleanse with a balm or micellar water, then
+follow with the Hydra-Calm Cleanser as your second cleanse.
+
+Should I use the cleanser morning and evening?
+Yes. Cleansing morning and evening is recommended. In the morning, it removes
+oils and overnight product residue. In the evening, it removes makeup,
+sunscreen, and environmental pollutants.
+
+MOISTURE SURGE MOISTURISER
+===========================
+
+How long does the 72-hour hydration last?
+The 72-hour hydration claim refers to the moisturiser's ability to maintain
+skin hydration levels for up to 72 hours in controlled clinical testing when
+applied once. For daily skincare routines, we recommend applying morning and
+evening for best results.
+
+Is the Moisture Surge Moisturiser suitable for oily skin?
+Yes. The formula is non-comedogenic and oil-free. The hyaluronic acid complex
+provides hydration without adding oil, making it suitable for oily and
+combination skin types. A lighter layer is sufficient for oily skin.
+
+Can I use the Moisture Surge Moisturiser as my sole morning moisturiser under SPF?
+Yes. Apply the moisturiser, let it absorb for 1–2 minutes, then apply SPF 50
+Glow Shield on top.
+
+Is the Moisture Surge Moisturiser available as a refill?
+Yes. The Refill Pod is available at 25% off the full price. Return your empty
+glass jar using our prepaid envelope and receive 50 Glow Rewards points.
+
+SPF 50 GLOW SHIELD
+==================
+
+Is the SPF 50 Glow Shield chemical or mineral sunscreen?
+It is a hybrid formula combining mineral filters (zinc oxide) with chemical
+filters (tinosorb S and M) for broad-spectrum UVA/UVB protection. The result
+is a lightweight, no white-cast formula suitable for all skin tones.
+
+Can I reapply SPF 50 Glow Shield over makeup?
+Yes. The lightweight gel-serum texture layers well over makeup. Press (do not
+rub) gently over your face using clean fingertips for touch-up applications.
+
+Does the SPF 50 Glow Shield leave a white cast?
+No. The formula is specifically engineered to be invisible on all skin tones
+including deeper skin tones. The zinc oxide particles are coated to prevent
+the white cast typical of mineral sunscreens.
+
+How often should I reapply sunscreen?
+Every 2 hours of direct sun exposure, or immediately after swimming or heavy
+sweating. One morning application provides protection for normal daily indoor
+and outdoor activities with limited prolonged sun exposure.
+
+Is SPF 50 Glow Shield water-resistant?
+It provides 40 minutes of water resistance. If you are swimming or sweating
+heavily, reapply after 40 minutes.
+
+RENEWAL EYE CREAM
+=================
+
+What does the Renewal Eye Cream target?
+Dark circles, puffiness, fine lines, and crow's feet. The peptide complex
+(Matrixyl 3000 + Argireline) firms the delicate skin around the eye, while
+caffeine and niacinamide reduce puffiness and discolouration.
+
+How do I apply the Renewal Eye Cream?
+Using your ring finger (lightest pressure), gently pat a small amount (rice
+grain size per eye) along the orbital bone — the bony ridge around the eye.
+Never pull or rub the eye area. Apply morning and evening.
+
+Is the Renewal Eye Cream suitable for contact lens wearers?
+Yes, but apply before inserting contact lenses and ensure no product gets
+directly in the eye.
+
+AHA RESURFACING TONER
+======================
+
+What does the AHA Resurfacing Toner do?
+10% glycolic acid exfoliates the top layer of dead skin cells, revealing
+smoother, brighter skin underneath. It also improves the absorption of serums
+and moisturisers applied afterwards, and reduces the appearance of pores
+and uneven texture over time.
+
+How do I use the AHA Resurfacing Toner?
+Apply to clean, dry skin using a cotton pad. Sweep gently over the face,
+avoiding the eye area and lips. Follow immediately with serum and moisturiser.
+Do not rinse off.
+
+How often can I use the AHA Toner?
+Start 2–3 times per week. Build up to daily use over 4–6 weeks as your skin
+adapts. Always wear SPF during the day when using AHAs. Do not use the AHA
+Toner on the same evening as retinol — alternate nights.
+
+Is my skin peeling because of the AHA Toner?
+Mild flaking is normal during the first few weeks of AHA use. Reduce frequency
+to once or twice a week until your skin adjusts. If peeling is severe, red,
+or accompanied by burning, discontinue use and contact us. Always moisturise
+after using the toner.
+
+BAKUCHIOL BALANCING SERUM
+=========================
+
+What is bakuchiol and why is it different from retinol?
+Bakuchiol is a plant-derived compound from the Psoralea corylifolia plant.
+It has been shown in clinical studies to produce similar anti-ageing results to
+retinol (improved firmness, reduced fine lines, improved texture) without
+causing irritation, photosensitivity, or purging. It is suitable for use
+morning and evening, during pregnancy (with physician approval), and for
+sensitive skin types that cannot tolerate retinol.
+
+Can I use bakuchiol and retinol together?
+Not necessary — they target similar pathways. Choose one or the other based
+on your skin tolerance. If you're new to actives, start with bakuchiol.
+If you are pregnant or breastfeeding, consult your doctor before use.
+
+CERAMIDE BARRIER CREAM
+======================
+
+Who should use the Ceramide Barrier Cream?
+Anyone with dry, compromised, flaky, or barrier-damaged skin. Particularly
+recommended for: eczema-prone skin during flare-ups, post-procedure recovery
+(after laser, chemical peels, or microneedling), winter skin repair, and as
+an overnight occlusive treatment.
+
+Can I use the Ceramide Barrier Cream over my other Lumière products?
+Yes. It works well as the final step of your evening routine, sealing in all
+previous products. Apply as the last step before sleep.
+
+NIACINAMIDE CLARITY SERUM
+=========================
+
+What does the Niacinamide Clarity Serum do?
+10% niacinamide minimises the appearance of pores, regulates sebum production,
+evens skin tone, and strengthens the skin's barrier function. It is suitable
+for morning and evening use and layers well with almost all other actives.
+
+Can I use niacinamide with Vitamin C?
+Yes. Earlier concerns about these two ingredients causing a reaction were based
+on outdated research. Modern formulations of both are stable together. You can
+layer our Vitamin C Glow Serum and Niacinamide Clarity Serum without concern.
+
+Can I use niacinamide with retinol?
+Yes. Niacinamide is one of the best partners for retinol — it helps reduce
+retinol-related irritation and dryness. Apply niacinamide first, let absorb,
+then apply retinol.
 
 ================================================================
-ORDERS
+SECTION 3: SKINCARE ROUTINES & PRODUCT COMBINATIONS
+================================================================
+
+What is the recommended morning routine?
+1. Hydra-Calm Cleanser
+2. AHA Resurfacing Toner (optional, 2–3×/week to start)
+3. Niacinamide Clarity Serum (optional)
+4. Vitamin C Glow Serum
+5. Renewal Eye Cream
+6. Moisture Surge Moisturiser
+7. SPF 50 Glow Shield (always last)
+
+What is the recommended evening routine?
+1. Hydra-Calm Cleanser
+2. AHA Resurfacing Toner (alternate nights with retinol)
+3. Bakuchiol or Niacinamide Serum (optional)
+4. Retinol Night Cream
+5. Renewal Eye Cream
+6. Moisture Surge Moisturiser
+7. Ceramide Barrier Cream (optional, as final occlusive step)
+
+What is the recommended weekly routine?
+Use the Royal Honey Mask once or twice a week after cleansing, before serum.
+Leave on for 10–15 minutes, rinse thoroughly, then continue with your serum
+and moisturiser.
+
+What is the recommended beginner routine (first-time Lumière user)?
+Start simple and build:
+Morning: Hydra-Calm Cleanser → Moisture Surge Moisturiser → SPF 50 Glow Shield.
+Evening: Hydra-Calm Cleanser → Moisture Surge Moisturiser.
+After 2–4 weeks, introduce Vitamin C Serum in the morning. After another 4 weeks,
+introduce Retinol Night Cream 2–3 evenings per week.
+
+What routine do you recommend for oily/acne-prone skin?
+Morning: Hydra-Calm Cleanser → Niacinamide Clarity Serum → Vitamin C Glow Serum
+→ Moisture Surge Moisturiser (light layer) → SPF 50 Glow Shield.
+Evening: Hydra-Calm Cleanser → AHA Resurfacing Toner (3×/week) → Niacinamide
+Clarity Serum → Retinol Night Cream (build gradually) → Moisture Surge Moisturiser.
+
+What routine do you recommend for dry/dehydrated skin?
+Morning: Hydra-Calm Cleanser → Vitamin C Glow Serum → Renewal Eye Cream →
+Moisture Surge Moisturiser → SPF 50 Glow Shield.
+Evening: Hydra-Calm Cleanser → Bakuchiol Balancing Serum → Renewal Eye Cream →
+Moisture Surge Moisturiser → Ceramide Barrier Cream.
+
+What routine do you recommend for sensitive/reactive skin?
+Morning: Hydra-Calm Cleanser → Moisture Surge Moisturiser → SPF 50 Glow Shield.
+Evening: Hydra-Calm Cleanser → Bakuchiol Balancing Serum → Moisture Surge
+Moisturiser → Ceramide Barrier Cream (if needed).
+Avoid AHA Toner and Retinol until sensitivity is under control.
+Patch test every new product.
+
+What routine do you recommend for anti-ageing?
+Morning: Hydra-Calm Cleanser → Vitamin C Glow Serum → Renewal Eye Cream →
+Moisture Surge Moisturiser → SPF 50 Glow Shield.
+Evening: Hydra-Calm Cleanser → Niacinamide Clarity Serum → Retinol Night Cream
+→ Renewal Eye Cream → Moisture Surge Moisturiser → Ceramide Barrier Cream
+(2–3 nights per week as occlusive step).
+Weekly: Royal Honey Mask.
+
+Can I use the Vitamin C Serum and Retinol Night Cream in the same routine?
+Use them at different times of day — Vitamin C in the morning, Retinol in the
+evening. Do not layer them together.
+
+Can I use the AHA Toner and Retinol on the same night?
+We do not recommend it. Both increase cell turnover and photosensitivity. Alternate
+nights: AHA Toner on Monday/Wednesday/Friday, Retinol on Tuesday/Thursday/Saturday.
+
+How many products can I safely layer?
+There is no strict maximum, but we recommend introducing one new product at a
+time (one product per 2–4 weeks) so you can identify any reaction. A complete
+routine should have cleanser, serum, eye cream, moisturiser, and SPF — anything
+beyond that is enhancement, not necessity.
+
+What ingredients should I never combine?
+- Retinol + AHA/BHA (same time of day) — use on alternate evenings
+- Vitamin C + AHA (same morning) — not harmful but can cause irritation
+- High-dose Vitamin C + Niacinamide (at very high doses, may cause flushing;
+  at our concentrations, fine to use together)
+- Benzoyl peroxide + Retinol — avoid same application
+- Multiple high-potency actives in one application — can overwhelm the barrier
+
+================================================================
+SECTION 4: INGREDIENTS & FORMULATION
+================================================================
+
+Are your products free from parabens?
+Yes. All Lumière products are 100% paraben-free.
+
+Are your products free from sulphates?
+Yes. No sodium lauryl sulphate (SLS) or sodium laureth sulphate (SLES) in any
+Lumière product.
+
+Are your products free from synthetic fragrances?
+Yes. We use no synthetic fragrances. Some products contain naturally-derived
+botanical scents from ingredients like rosehip, bakuchiol, and centella asiatica.
+Full ingredient lists are available on each product page.
+
+Are your products free from mineral oil?
+Yes. We use squalane (from sugarcane) and plant-derived emollients instead of
+petroleum-derived mineral oils.
+
+Are your products free from microplastics?
+Yes. No microbeads or microplastic ingredients are used in any Lumière product.
+
+Are your products free from formaldehyde-releasing preservatives?
+Yes. We use a combination of phenoxyethanol, ethylhexylglycerin, and vitamin E
+as our preservation system, which meets EU and UK cosmetics regulations.
+
+Where can I find the full ingredient list for a product?
+Every product page on lumiereskin.com includes the full INCI (International
+Nomenclature Cosmetic Ingredients) list. You can also email us at
+support@lumiereskin.com for a printed copy.
+
+Are any Lumière products safe for nut allergies?
+We do not use common tree nut oils (almond, walnut, hazelnut) in our core range.
+However, some products contain macadamia nut oil or shea butter derivatives.
+Review the full INCI list for each product and consult your allergist if you
+have severe nut allergies.
+
+Do you use alcohol in your products?
+We use fatty alcohols (cetyl alcohol, cetearyl alcohol) which are emollients
+and actually beneficial for skin barrier function. We do not use drying
+alcohols (ethanol, denatured alcohol, isopropyl alcohol) as primary ingredients.
+Trace amounts of ethanol may appear in some formulas as a solubiliser.
+
+Are Lumière products pH-balanced?
+Yes. Our products are formulated at a pH appropriate to their active ingredients
+and skin compatibility. The AHA Toner is formulated at pH 3.5–4.0 for glycolic
+acid efficacy. Other products are formulated at skin-compatible pH 4.5–6.5.
+
+================================================================
+SECTION 5: STORAGE & SHELF LIFE
+================================================================
+
+How long do Lumière products last once opened?
+- Vitamin C Glow Serum: 6 months (abbreviated due to L-ascorbic acid instability)
+- All other products: 12 months
+The PAO (Period After Opening) symbol on packaging shows an open jar with a
+number (e.g., "12M" = 12 months after opening).
+
+How long do unopened products last?
+Unopened products have a shelf life of 24–36 months from manufacture date when
+stored correctly. Batch code and expiry information is printed on the base of
+each product.
+
+How should I store my Lumière products?
+Store in a cool, dry place away from direct sunlight and heat. The Vitamin C
+Glow Serum should ideally be kept at 8–15°C (a cool cabinet, not direct
+refrigerator cold). Avoid storing in humid bathrooms.
+
+Can I refrigerate my Lumière products?
+Yes. Refrigerating products (especially the Vitamin C Serum) can extend their
+freshness and stability. Ensure products are in sealed containers and away from
+food. Do not freeze.
+
+My product has changed texture or smell. What should I do?
+If a product has changed significantly in texture, colour, or smell within its
+PAO period, stop using it and contact us at support@lumiereskin.com with your
+batch code. We will investigate and replace the product if necessary.
+
+================================================================
+SECTION 6: TRAVEL & SIZES
+================================================================
+
+Do you offer travel-size products?
+Yes. We offer 15ml travel sizes of: Vitamin C Glow Serum, Retinol Night Cream,
+Moisture Surge Moisturiser, and SPF 50 Glow Shield. These are available
+individually and as part of our Travel Edit set.
+
+Are travel sizes compliant with airline liquid restrictions?
+Yes. All travel sizes are under 100ml and comply with the 100ml airline
+carry-on rule (EU, UK, US). Place them in a transparent resealable bag as
+per airline guidelines.
+
+Do you offer a Discovery Kit or sample set?
+Yes. Our Lumière Discovery Kit includes 5ml samples of our six bestselling
+products in a travel pouch. It is available at lumiereskin.com/discovery-kit.
+New email subscribers also receive a free sample sachet with their first order.
+
+================================================================
+SECTION 7: ORDERS
 ================================================================
 
 How do I place an order?
 Orders can be placed at lumiereskin.com. Add items to your cart, proceed to
 checkout, and enter your shipping and payment details. You will receive an
-order confirmation email immediately after placing your order.
+order confirmation email within minutes of placing your order.
+
+What payment methods do you accept?
+We accept Visa, Mastercard, American Express, PayPal, Apple Pay, Google Pay,
+and Klarna (Buy Now, Pay Later in 3 interest-free instalments). All transactions
+are encrypted via Stripe.
+
+Is my payment information secure?
+Yes. We do not store credit card details on our servers. All payments are
+processed by Stripe, a PCI DSS Level 1 certified payment processor.
 
 Can I modify my order after placing it?
 Orders can be modified within 2 hours of placement by contacting us at
@@ -115,24 +563,24 @@ support@lumiereskin.com or calling 1-800-586-4273. After 2 hours, your order
 enters fulfilment and cannot be changed.
 
 Can I cancel my order?
-Orders can be cancelled within 2 hours of placement. After 2 hours, your order
-cannot be cancelled. If your order has already shipped, you may return it once
-delivered under our 30-day return policy.
+Orders can be cancelled within 2 hours of placement. After that, the order
+may already be in packing and cannot be stopped. If your order has shipped,
+you may return it once delivered under our 30-day return policy.
 
 How do I track my order?
 Once your order ships, you will receive a shipping confirmation email with a
-tracking number. You can track your order at lumiereskin.com/track or directly
-on the carrier's website. Tracking updates may take 12-24 hours to appear.
+tracking number and direct tracking link. You can also track at
+lumiereskin.com/track. Tracking updates may take 12–24 hours to appear.
 
 I did not receive an order confirmation email. What should I do?
-Check your spam or junk folder. If it is not there, your email address may have
-been entered incorrectly at checkout. Contact us at support@lumiereskin.com
-with your full name and the email you used, and we will locate your order.
+Check your spam or junk folder. If it is not there, your email address may
+have been entered incorrectly at checkout. Contact us at
+support@lumiereskin.com with your full name and the email you used at checkout.
 
 Can I change my shipping address after ordering?
 Shipping addresses can be updated within 2 hours of placing your order. After
-that, we cannot guarantee the change can be made as the order may already be
-in packing. Contact us immediately at support@lumiereskin.com.
+that, we cannot guarantee the change, as the order may already be in packing.
+Contact us immediately at support@lumiereskin.com.
 
 My order is showing as delivered but I have not received it.
 First, check around your property, with neighbours, and in any secure locations
@@ -146,13 +594,33 @@ If items are missing from a single package, contact us within 48 hours at
 support@lumiereskin.com with your order number and we will send the missing
 items or issue a refund.
 
+My order arrived damaged.
+Take photos of the damaged packaging and products, then contact us within
+48 hours at support@lumiereskin.com with your order number and photos.
+We will arrange a replacement or refund promptly.
+
+I received the wrong item.
+We're sorry about that. Contact us at support@lumiereskin.com with your order
+number and a photo of the incorrect item. We will send the correct item with
+express shipping and arrange collection of the wrong item at no cost to you.
+
+Can I pre-order products that are out of stock?
+Yes. You can join the waitlist on the product page by entering your email.
+When the product is back in stock you will be notified automatically. We do
+not take payment until the item ships.
+
+Are there quantity limits per order?
+To ensure fairness during launches and high-demand periods, we limit purchases
+to 3 units per product per order for retail customers. Professional and
+wholesale customers are subject to their account terms.
+
 ================================================================
-SHIPPING & DELIVERY
+SECTION 8: SHIPPING & DELIVERY
 ================================================================
 
 What are your shipping options and costs?
-- Standard shipping (3-5 business days): Free on orders over $65, $5.95 under $65
-- Express shipping (1-2 business days): $12.95 flat rate
+- Standard shipping (3–5 business days): Free on US orders over $65, $5.95 under $65
+- Express shipping (1–2 business days): $12.95 flat rate
 - Overnight shipping (next business day, order before 12pm EST): $24.95
 - Saturday delivery: Available in select areas, $18.95
 
@@ -167,34 +635,57 @@ Singapore, UAE, Saudi Arabia, and more. Visit lumiereskin.com/shipping for the
 full list. We do not currently ship to Russia, Belarus, or North Korea.
 
 How long does international shipping take?
-UK and EU: 5-8 business days.
-Canada and Australia: 7-12 business days.
-Asia and Middle East: 10-15 business days.
+UK and EU: 5–8 business days.
+Canada and Australia: 7–12 business days.
+Asia and Middle East: 10–15 business days.
 These are estimates and may vary due to customs processing.
 
+Will I be charged customs duties or import taxes?
+International customers may be subject to import duties, VAT, or taxes
+levied by their local customs authority. These charges are the customer's
+responsibility and are not included in our shipping fees. We recommend
+checking your country's import thresholds before ordering.
+
 My order is delayed. What should I do?
-Occasionally, orders may be delayed due to carrier issues, customs, or high
-demand periods. Check your tracking link for the latest update. If your order
-is more than 5 business days past the estimated delivery date, contact us at
-support@lumiereskin.com and we will investigate.
+Check your tracking link for the latest update. If your order is more than
+5 business days past the estimated delivery date, contact us at
+support@lumiereskin.com and we will investigate with the carrier.
 
 Do you offer free shipping?
-Yes. Standard shipping is free on all US orders over $65. International orders
+Standard shipping is free on all US orders over $65. International orders
 do not currently qualify for free shipping.
 
+Do you offer carbon-neutral shipping?
+Yes. We offset 100% of shipping carbon emissions through our partnership
+with EcoCart. This is included at no extra cost on all orders.
+
+Do you ship to PO Boxes?
+We ship standard orders to PO Boxes via USPS. Express, overnight, and
+Saturday delivery requires a street address.
+
+Can I choose a specific delivery day?
+Overnight and express shipping give you the most control over delivery day.
+Standard shipping delivery dates are carrier estimates and cannot be guaranteed
+to a specific day.
+
+What happens if I am not home during delivery?
+Most carriers will leave the package in a safe location or with a neighbour.
+If the item requires a signature, a card will be left with collection/redelivery
+instructions. You can also update delivery preferences through the carrier's app.
+
 ================================================================
-RETURNS & REFUNDS
+SECTION 9: RETURNS & REFUNDS
 ================================================================
 
 What is your return policy?
 We accept return requests within 30 days of delivery. Items must be unused and
 in original packaging to qualify for a full refund. If you have experienced an
-adverse reaction to a product, we will issue a full refund regardless of usage
-— your skin health is our priority.
+adverse skin reaction to a product, we will issue a full refund regardless of
+how much product was used — your skin health is our absolute priority.
 
 How do I start a return?
 Email returns@lumiereskin.com with your order number and reason for returning.
-Our team will provide a prepaid return shipping label within 1-2 business days.
+Our team will provide a prepaid return shipping label within 1–2 business days.
 Pack the item securely in its original packaging and drop it at the designated
 carrier location.
 
@@ -203,8 +694,8 @@ No. For customers in the USA, we provide a prepaid return label at no cost.
 International customers are responsible for return shipping costs.
 
 How long do refunds take?
-Once we receive and inspect your return (2-3 business days), your refund will
-be processed within 5-7 business days to your original payment method.
+Once we receive and inspect your return (2–3 business days), your refund will
+be processed within 5–7 business days to your original payment method.
 You will receive a refund confirmation email.
 
 Can I exchange an item instead of returning it?
@@ -217,46 +708,102 @@ Yes. Gift recipients can return items within 30 days of the original purchase
 date. The refund will be issued as store credit to the recipient's account.
 Contact us with the original order number to arrange this.
 
-I used a discount code. Will I be refunded the full price or discounted price?
+I used a discount code. Will I be refunded the full price or the discounted price?
 You will be refunded the amount you actually paid after the discount was applied.
 
+What if I used Klarna (Buy Now, Pay Later)?
+We will issue the refund to Klarna. If your Klarna plan is ongoing, contact
+Klarna directly after your refund is processed to pause or cancel remaining
+instalments.
+
+Can I return a gift card?
+Digital gift cards are non-refundable once sent.
+
+Can I return products bought from a third-party retailer (e.g. Sephora)?
+Returns of products purchased from third-party retailers must be made through
+that retailer, not through lumiereskin.com. Please contact the retailer directly.
+
+Can I return an opened product?
+Generally no, unless you have experienced an adverse reaction. If you have
+used a product and experienced a skin reaction, contact us and we will issue
+a full refund regardless of usage level.
+
 ================================================================
-SKIN REACTIONS & CONCERNS
+SECTION 10: SKIN REACTIONS & CONCERNS
 ================================================================
 
 I had a reaction to a Lumière product. What should I do?
 Stop using the product immediately. Rinse the affected area with cool water.
-If you experience severe swelling, difficulty breathing, or a severe rash,
-seek medical attention immediately. For mild reactions, contact us at
-support@lumiereskin.com — we will issue a full refund and our team of
+If you experience severe swelling, difficulty breathing, hives spreading beyond
+the application area, or any sign of anaphylaxis, seek emergency medical
+attention immediately. For mild reactions (redness, itching, mild rash), contact
+us at support@lumiereskin.com — we will issue a full refund and our team of
 estheticians can advise on alternatives suitable for your skin type.
 
+What do I do if I get a Lumière product in my eye?
+Rinse your eye immediately with clean, lukewarm water for at least 15 minutes.
+If irritation persists, seek medical attention. Contact us and we will note the
+incident for product safety records.
+
+Is it normal for the AHA Toner to tingle?
+A mild tingle on application is normal and indicates the glycolic acid is
+active. If the tingle becomes a burn, rinse off immediately with cool water,
+skip the next application, and try every 3–4 days instead.
+
 Is it normal for my skin to purge when I start using the Retinol Night Cream?
-Skin purging can occur with retinol, especially in the first 2-6 weeks of use.
-This involves increased breakouts or flaking as your skin accelerates cell
-turnover. Purging is temporary. If it persists beyond 8 weeks or is severe,
-discontinue use and contact us. To minimise purging, start with every other
-night application and build up gradually.
+Skin purging can occur with retinol, especially in the first 2–6 weeks.
+Purging involves increased breakouts as your skin accelerates cell turnover —
+this brings congestion to the surface faster than normal. Purging is temporary.
+If it persists beyond 8 weeks or is severe, discontinue use and contact us.
 
 My skin is peeling after using the AHA Toner. Is this normal?
-Mild flaking is normal when introducing AHAs. Reduce frequency to 1-2 times
-per week until your skin adjusts. Always moisturise after using the toner and
-wear SPF during the day. If peeling is severe or accompanied by redness and
-burning, discontinue use and contact us.
+Mild flaking is normal in the adjustment period. Reduce use frequency to
+1–2 times per week until your skin adapts. Always moisturise after the toner
+and wear SPF daily. If peeling is severe or accompanied by redness and burning,
+discontinue use.
 
-Can I use Lumière products if I have eczema or rosacea?
-Many customers with eczema and rosacea use our Hydra-Calm Cleanser and
-Moisture Surge Moisturiser successfully. We recommend avoiding AHAs, retinol,
-and vitamin C formulas until your skin condition is stable. We always recommend
-consulting your dermatologist before introducing new products.
+Can I use Lumière products if I have eczema?
+Many customers with eczema use our Hydra-Calm Cleanser and Ceramide Barrier
+Cream successfully — both are formulated for compromised barrier function.
+We recommend avoiding AHAs, retinol, and vitamin C during active eczema flares.
+Consult your dermatologist before introducing new products during a flare.
+
+Can I use Lumière products if I have rosacea?
+Customers with rosacea often tolerate our Hydra-Calm Cleanser, Moisture Surge
+Moisturiser, and SPF 50 Glow Shield well. Avoid AHA Toner, Vitamin C Serum, and
+Retinol Night Cream during rosacea flares. The Bakuchiol Balancing Serum and
+Niacinamide Clarity Serum may help calm redness. Always consult your dermatologist.
+
+Can I use Lumière products if I have psoriasis?
+Psoriasis is a medical condition managed in collaboration with dermatologists.
+Our Ceramide Barrier Cream may support barrier repair between flares, but we
+cannot make medical claims about psoriasis treatment. Please consult your doctor.
+
+Can I use Lumière products if I have acne?
+Yes. The Niacinamide Clarity Serum, AHA Resurfacing Toner, and Retinol Night
+Cream are all helpful for acne-prone skin. Start slowly and introduce one active
+at a time. Our Hydra-Calm Cleanser is gentle enough for daily use on acne-prone
+skin. Avoid heavy occlusive products during active breakouts.
+
+Can I use Lumière products if I have melasma?
+Our Vitamin C Glow Serum and AHA Resurfacing Toner can help manage melasma,
+but SPF is the most critical part of any melasma routine — use SPF 50 Glow
+Shield every single day. Melasma is a complex condition; we recommend working
+with a dermatologist for a comprehensive treatment plan.
+
+Can I use Lumière products after a chemical peel or laser treatment?
+Always follow your dermatologist's post-procedure instructions first. As a
+general guide: use only the Hydra-Calm Cleanser and Ceramide Barrier Cream for
+the first 7–14 days after a procedure. Reintroduce active serums only after
+your skin has fully healed and with dermatologist clearance.
 
 ================================================================
-ACCOUNT & LOYALTY PROGRAMME
+SECTION 11: ACCOUNT & LOYALTY PROGRAMME
 ================================================================
 
 How do I create an account?
 Visit lumiereskin.com/account and click Sign Up. Enter your name, email, and
-a password. You will receive a verification email to activate your account.
+password. You will receive a verification email to activate your account.
 
 What is the Lumière Glow Rewards programme?
 Glow Rewards is our loyalty programme. You earn:
@@ -264,16 +811,37 @@ Glow Rewards is our loyalty programme. You earn:
 - 50 bonus points for leaving a verified product review
 - 100 bonus points on your birthday (registered in account settings)
 - 200 points for referring a friend who makes their first purchase
+- 25 bonus points for following us on Instagram (@lumiereskin)
+- 25 bonus points for sharing a product on social media (with tag #LumièreGlow)
 100 points = $5 reward credit redeemable at checkout.
 
 Do my Glow Rewards points expire?
 Points expire after 12 months of account inactivity (no purchases or logins).
-Reward credits expire 6 months after being issued.
+Reward credits expire 6 months after being issued. You will receive email
+reminders before expiry.
 
 How do I redeem my Glow Rewards points?
 Log into your account at checkout. Under the payment section, you will see your
-available reward credits. Select the amount you want to apply to your order.
+available reward credits. Select the amount you want to apply.
 Rewards cannot be combined with other promotional discount codes.
+
+Can I transfer my Glow Rewards points to someone else?
+Points are non-transferable. Reward credits cannot be moved to another account.
+
+What happens to my points if I return a product?
+Points earned on returned purchases are deducted from your Glow Rewards balance.
+
+Do I earn points on sale items?
+Yes. You earn points on the amount actually paid, including sale prices.
+
+Do I earn points on gift card purchases?
+No. Gift card purchases do not earn Glow Rewards points. Points are earned when
+the gift card is redeemed on a product purchase.
+
+How do I refer a friend?
+Log into your account, go to the Glow Rewards section, and find your unique
+referral link. Share it with friends. When they make their first purchase via
+your link, you receive 200 bonus points.
 
 I forgot my password. How do I reset it?
 Click Forgot Password on the login page and enter your email address. You will
@@ -281,76 +849,200 @@ receive a reset link within 5 minutes. Check your spam folder if it does not
 arrive. The reset link expires after 24 hours.
 
 How do I update my email address or personal details?
-Log into your account, go to Account Settings, and update your details. If you
-cannot access your account, contact us at support@lumiereskin.com.
+Log into your account, go to Account Settings, and update your details.
+If you cannot access your account, contact us at support@lumiereskin.com.
+
+Can I delete my account?
+Yes. Contact us at support@lumiereskin.com and request account deletion.
+We will confirm the deletion within 5 business days. Deleting your account
+will erase all Glow Rewards points and purchase history.
 
 ================================================================
-PROMOTIONS, GIFT CARDS & BUNDLES
+SECTION 12: SUBSCRIPTIONS & AUTO-REPLENISHMENT
+================================================================
+
+Do you offer a subscription or auto-replenishment service?
+Yes. Subscribe & Save lets you set up automatic delivery of your favourite
+products at 15% off the regular price. You can set delivery frequency to
+every 4, 6, 8, or 12 weeks. Subscriptions can be paused, modified, or cancelled
+at any time from your account dashboard.
+
+How do I cancel my subscription?
+Log into your account, go to Subscriptions, and click Cancel. Cancellations
+must be made at least 48 hours before your next renewal date to avoid being
+charged for that cycle.
+
+Can I skip a delivery in my subscription?
+Yes. Log into your account, go to Subscriptions, and click Skip Next Delivery.
+You can skip up to 2 consecutive deliveries before your subscription is
+automatically paused.
+
+Do subscriptions earn Glow Rewards points?
+Yes. Each subscription order earns full Glow Rewards points on the amount paid.
+
+================================================================
+SECTION 13: PROMOTIONS, GIFT CARDS & BUNDLES
 ================================================================
 
 Do you offer discount codes?
-We run seasonal promotions and offer discounts through our Glow Rewards
-programme and email newsletter. Subscribe at lumiereskin.com/subscribe.
-We do not offer blanket first-order discounts but new subscribers receive a
-free sample with their first order.
+We run seasonal promotions and offer discounts through our Glow Rewards programme
+and email newsletter. Subscribe at lumiereskin.com/subscribe. New email
+subscribers receive a free sample sachet with their first order.
 
 Can I use more than one discount code?
 Only one discount code can be applied per order. Discount codes cannot be
-combined with Glow Rewards credits or other promotions.
+combined with Glow Rewards credits or other active promotions.
+
+Do you offer a first-time customer discount?
+We do not offer a blanket first-order discount, but new subscribers receive a
+free sample with their first order. Check our newsletter and social channels
+for new customer promotions during seasonal sales.
+
+When do you hold sales?
+Our main promotional events are:
+- Spring Renewal Sale (April)
+- Summer Edit (July)
+- Black Friday / Cyber Monday (November)
+- Holiday Gift Season (December)
+Subscribe to our email list to receive early access notifications.
 
 Do you sell gift cards?
 Yes. Digital gift cards are available in denominations of $25, $50, $100, and
 $200. They can be purchased at lumiereskin.com/gift-cards and are delivered
 instantly by email. Gift cards do not expire and cannot be exchanged for cash.
 
+Can I check my gift card balance?
+Yes. Visit lumiereskin.com/gift-cards and enter your gift card code to check
+the remaining balance.
+
+Do you offer gift wrapping?
+Yes. Premium gift wrapping is available at checkout for $4.95. Your order will
+arrive in a signature Lumière gift box with ribbon and a personalised message
+card.
+
 Do you offer skincare bundles?
 Yes. Our curated bundles offer savings of up to 20% compared to buying products
-individually. Popular bundles include the Glow Starter Kit, Anti-Ageing Duo,
-and the Sensitive Skin Essentials set. View all bundles at lumiereskin.com/bundles.
+individually. Popular bundles:
+- Glow Starter Kit (Cleanser + Vitamin C Serum + SPF 50)
+- Anti-Ageing Duo (Retinol Night Cream + Renewal Eye Cream)
+- Sensitive Skin Essentials (Hydra-Calm Cleanser + Bakuchiol Serum + Ceramide Cream)
+- Complete Routine Set (all 8 core products at maximum savings)
+View all bundles at lumiereskin.com/bundles.
 
 ================================================================
-SUSTAINABILITY & ETHICS
+SECTION 14: SUSTAINABILITY & ETHICS
 ================================================================
 
 Is Lumière sustainable?
-Sustainability is core to our mission. We use:
-- Recycled and recyclable glass packaging
-- FSC-certified paper for all printed materials
+Sustainability is central to our mission. Our practices include:
+- Recycled and recyclable glass packaging for all serums and creams
+- FSC-certified paper for all printed materials including boxes and leaflets
 - Carbon-neutral shipping via our partnership with EcoCart
-- Solar-powered manufacturing facility
+- Solar-powered manufacturing facility in Lausanne
 - Refillable options for our bestselling moisturiser and cleanser
+- Palm oil-free formulations
+- Zero single-use plastic in our packaging from 2024 onwards
 
 Do you have a refill programme?
-Yes. Our Refill & Save programme lets you purchase refill pods for the
-Moisture Surge Moisturiser and Hydra-Calm Cleanser at 25% off the full price.
-Return your empty glass jar using our prepaid envelope and receive 50 Glow
-Rewards points.
+Yes. Our Refill & Save programme lets you purchase refill pods for the Moisture
+Surge Moisturiser and Hydra-Calm Cleanser at 25% off. Return your empty glass
+jar using our prepaid recycling envelope and receive 50 Glow Rewards points per
+jar returned.
+
+How do I recycle Lumière packaging?
+Glass jars and bottles can be recycled with your household glass recycling.
+Remove the pump mechanism before recycling the glass (pumps are typically
+plastic and should go in general waste). Outer cardboard boxes are recyclable
+via standard paper/cardboard recycling. We include recycling instructions in
+every order.
+
+Are your ingredients ethically sourced?
+Yes. We audit our supply chain annually. We do not source from regions with
+known labour violations. Our botanicals are sourced from certified sustainable
+farms. We use Fair Trade shea from Ghana and certified organic rosehip from Chile.
+
+What percentage of your packaging is recycled or recyclable?
+As of 2025: 92% of our packaging by weight is either recycled (containing
+at least 30% post-consumer recycled content) or recyclable. We are working
+toward 100% by 2027.
+
+Do you have B Corp certification?
+We are currently in the B Corp certification process and expect to achieve
+certification by Q4 2026. We already meet all B Corp standards; the process
+involves documentation and third-party audit.
 
 ================================================================
-WHOLESALE & COLLABORATION
+SECTION 15: PROFESSIONAL & WHOLESALE
 ================================================================
 
 Do you offer wholesale pricing for spas or clinics?
 Yes. We have a professional skincare programme for licensed estheticians,
-dermatology clinics, and luxury spas. Apply at lumiereskin.com/professional.
+dermatology clinics, medspas, and luxury spas. Minimum order quantities apply.
+Apply at lumiereskin.com/professional.
+
+What discounts are available for professional buyers?
+Qualified professionals receive 30–40% wholesale discount, access to
+professional-only sizes (500ml and 1L), early access to new product launches,
+and co-branded marketing materials. Contact professional@lumiereskin.com for
+full terms.
+
+Do you provide training or education for professional accounts?
+Yes. We offer online training modules, access to our clinical data library,
+and in-person training events at key industry conferences for professional
+account holders.
 
 I am a content creator. Can we collaborate?
 We run a creator partnership programme. If you have an engaged audience
 interested in clean beauty, apply at lumiereskin.com/creators. We review all
-applications and respond within 2 weeks.
+applications and respond within 2 weeks. We work with creators across Instagram,
+YouTube, TikTok, and editorial platforms.
+
+Do you offer an affiliate programme?
+Yes. Commission-based affiliate partnerships are available. Apply via our
+creator programme link. Standard commission is 12% per sale referred via your
+unique link. Top affiliates are invited to our ambassador programme.
 
 ================================================================
-CONTACT & SUPPORT
+SECTION 16: CONTACT & SUPPORT
 ================================================================
 
 How can I contact Lumière customer support?
-Email: support@lumiereskin.com (response within 24 hours)
-Phone: 1-800-586-4273 (Mon-Fri 9am-6pm EST)
-Live chat: lumiereskin.com (Mon-Fri 9am-6pm EST)
+Email: support@lumiereskin.com (response within 24 hours on business days)
+Phone: 1-800-586-4273 (Mon–Fri 9am–6pm EST)
+Live chat: lumiereskin.com (Mon–Fri 9am–6pm EST)
 Returns: returns@lumiereskin.com
 Press & media: press@lumiereskin.com
+Professional/wholesale: professional@lumiereskin.com
+Creator partnerships: creators@lumiereskin.com
 
 What are your customer support hours?
-Our support team is available Monday to Friday, 9am to 6pm EST.
-Emails received outside these hours will be responded to the next business day.
+Our support team is available Monday to Friday, 9am to 6pm EST. Emails
+received outside these hours will be responded to the next business day.
 For urgent matters, leave a voicemail and we will return your call promptly.
+
+How quickly will I get a response to my email?
+We aim to respond to all emails within 24 hours on business days. During
+high-volume periods (Black Friday, December holidays), response times may
+extend to 48 hours.
+
+How do I provide feedback about a product?
+You can leave a verified review on the product page (login required). You can
+also email feedback@lumiereskin.com. All feedback is shared with our
+product development team and is used to improve formulations.
+
+Do you have a store locator?
+Lumière is available at select luxury retailers and department stores in the US
+and internationally. Visit lumiereskin.com/stockists for the current list of
+authorised retail partners. Beware of unauthorised sellers on third-party
+marketplaces — only purchase from lumiereskin.com or authorised stockists to
+guarantee product authenticity.
+
+How can I verify a product is authentic?
+All Lumière products include a holographic authenticity seal on the base.
+If you suspect a product is counterfeit, do not use it and contact us with the
+seller name and a photo of the product. Counterfeits can be dangerous and are
+not covered by our returns policy.
+
+================================================================
+END OF KNOWLEDGE BASE
+================================================================
