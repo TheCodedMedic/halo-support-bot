@@ -259,7 +259,7 @@ def chat():
 
         for _ in range(6):
             response = client.messages.create(
-                model="claude-haiku-3-5",
+                model="claude-haiku-4-5",
                 max_tokens=600,
                 system=[{
                     "type": "text",
