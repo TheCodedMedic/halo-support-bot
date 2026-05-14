@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify, session, redirect, u
 from dotenv import load_dotenv
 from knowledge_base import get_active_document, load_document, set_active_document, DOCS_DIR
 from werkzeug.utils import secure_filename
+from datetime import datetime, timedelta
 import anthropic
 import os
 import uuid
@@ -11,14 +12,23 @@ load_dotenv(_env_path, override=True)
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", os.urandom(24).hex())
+app.config["SESSION_PERMANENT"] = True
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(hours=24)
+
 client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
 conversations = {}  # session_id -> list of messages
+ticket_log = []
+escalation_log = []
+
+# ─────────────────────────────────────────────
+# TOOLS
+# ─────────────────────────────────────────────
 
 TOOLS = [
     {
         "name": "search_knowledge_base",
-        "description": "Search the company FAQ and knowledge base. Always use this first before answering any support question.",
+        "description": "Search the company knowledge base, product catalogue, and FAQ. Always call this first before answering any question about products, pricing, ingredients, policies, or orders.",
         "input_schema": {
             "type": "object",
             "properties": {
@@ -29,22 +39,43 @@ TOOLS = [
     },
     {
         "name": "create_ticket",
-        "description": "Create a support ticket. Only call this after you have collected the customer's name, email, and order number (if relevant). Never call this before asking for those details.",
+        "description": "Create a support ticket. Only call after collecting the customer's name, email, and order number. The customer will receive a confirmation email automatically.",
         "input_schema": {
             "type": "object",
             "properties": {
                 "issue": {"type": "string", "description": "Full description of the customer's problem"},
                 "priority": {"type": "string", "enum": ["low", "normal", "high", "urgent"]},
+                "category": {
+                    "type": "string",
+                    "enum": ["Order & Shipping", "Returns & Refunds", "Product Inquiry", "Skin Concern", "Account & Loyalty", "Purchase Intent", "Escalation", "General"],
+                    "description": "Category that best describes the issue"
+                },
                 "customer_name": {"type": "string"},
                 "customer_email": {"type": "string"},
                 "order_number": {"type": "string", "description": "Order number if relevant, otherwise 'N/A'"}
             },
-            "required": ["issue", "priority", "customer_name", "customer_email", "order_number"]
+            "required": ["issue", "priority", "category", "customer_name", "customer_email", "order_number"]
+        }
+    },
+    {
+        "name": "send_purchase_email",
+        "description": "Use when a customer wants to purchase a specific product. Collect their name and email first, then call this to send them a purchase email and notify the team. Do NOT use create_ticket for purchases — use this instead.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "customer_name": {"type": "string"},
+                "customer_email": {"type": "string"},
+                "product_name": {"type": "string"},
+                "product_price": {"type": "string", "description": "e.g. '$68.00'"},
+                "product_sku": {"type": "string"},
+                "product_description": {"type": "string", "description": "One-line product description"}
+            },
+            "required": ["customer_name", "customer_email", "product_name", "product_price", "product_sku", "product_description"]
         }
     },
     {
         "name": "escalate_to_human",
-        "description": "Escalate to a human agent. Use when customer is frustrated or 2 searches failed.",
+        "description": "Escalate to a human agent immediately. Use when the customer is frustrated, upset, or when two knowledge base searches have not resolved the issue.",
         "input_schema": {
             "type": "object",
             "properties": {
@@ -55,44 +86,87 @@ TOOLS = [
     }
 ]
 
+# ─────────────────────────────────────────────
+# TOOL IMPLEMENTATIONS
+# ─────────────────────────────────────────────
+
 def search_knowledge_base(query: str) -> str:
     _, content = get_active_document()
     if not content:
-        return "No knowledge base loaded. Please contact support directly."
+        return "No knowledge base loaded."
     query_lower = query.lower()
     lines = [l for l in content.splitlines() if query_lower in l.lower()]
     if lines:
         return "\n".join(lines)
-    # Fall back to returning the full document so the agent can scan it
     return content
 
-def create_ticket(issue: str, priority: str = "normal", customer_name: str = "Unknown",
-                  customer_email: str = "Unknown", order_number: str = "N/A") -> str:
-    from datetime import datetime
+
+def create_ticket(issue: str, priority: str = "normal", category: str = "General",
+                  customer_name: str = "Unknown", customer_email: str = "Unknown",
+                  order_number: str = "N/A") -> str:
     ticket_id = f"TKT-{str(uuid.uuid4())[:6].upper()}"
     ticket_log.append({
         "ticket_id": ticket_id,
         "issue": issue,
         "priority": priority,
+        "category": category,
         "customer_name": customer_name,
         "customer_email": customer_email,
         "order_number": order_number,
         "timestamp": datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC"),
     })
+    # Google Sheets
     try:
         from integrations.sheets import log_ticket
-        log_ticket(ticket_id, issue, priority, customer_name, customer_email, order_number)
+        log_ticket(ticket_id, issue, priority, customer_name, customer_email, order_number, category)
     except Exception as e:
-        print(f"[sheets] failed to log ticket: {e}")
+        print(f"[sheets] {e}")
+    # Email → business owner
     try:
         from integrations.email_notify import send_ticket_email
         send_ticket_email(ticket_id, issue, priority, customer_name, customer_email, order_number)
     except Exception as e:
-        print(f"[email] failed to send notification: {e}")
-    return f"Ticket {ticket_id} created with {priority} priority. Our team will be in touch at {customer_email} within 24 hours."
+        print(f"[email-owner] {e}")
+    # Email → customer confirmation
+    try:
+        from integrations.email_notify import send_customer_confirmation_email
+        send_customer_confirmation_email(ticket_id, issue, priority, customer_name, customer_email)
+    except Exception as e:
+        print(f"[email-customer] {e}")
+    # Slack
+    try:
+        from integrations.slack_alert import send_ticket_alert
+        send_ticket_alert(ticket_id, issue, priority, customer_name, customer_email, order_number)
+    except Exception as e:
+        print(f"[slack-ticket] {e}")
+    return f"Ticket {ticket_id} created successfully. A confirmation email has been sent to {customer_email}. Our team will respond within 24 hours."
+
+
+def send_purchase_email(customer_name: str, customer_email: str, product_name: str,
+                        product_price: str, product_sku: str, product_description: str = "") -> str:
+    ref_id = f"PUR-{str(uuid.uuid4())[:6].upper()}"
+    # Email → customer
+    try:
+        from integrations.email_notify import send_purchase_email as _send_purchase
+        _send_purchase(customer_name, customer_email, product_name, product_price, product_sku, product_description)
+    except Exception as e:
+        print(f"[email-purchase] {e}")
+    # Slack
+    try:
+        from integrations.slack_alert import send_purchase_alert
+        send_purchase_alert(customer_name, customer_email, product_name, product_price, product_sku)
+    except Exception as e:
+        print(f"[slack-purchase] {e}")
+    # Sheets
+    try:
+        from integrations.sheets import log_purchase
+        log_purchase(ref_id, customer_name, customer_email, product_name, product_price, product_sku)
+    except Exception as e:
+        print(f"[sheets-purchase] {e}")
+    return f"A purchase email has been sent to {customer_email} with a link to complete their order for {product_name}. Reference: {ref_id}."
+
 
 def escalate_to_human(reason: str) -> str:
-    from datetime import datetime
     escalation_log.append({
         "reason": reason,
         "timestamp": datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC"),
@@ -101,58 +175,75 @@ def escalate_to_human(reason: str) -> str:
         from integrations.slack_alert import send_escalation_alert
         send_escalation_alert(reason)
     except Exception as e:
-        print(f"[slack] failed to send escalation: {e}")
-    return "Connecting you to a human agent now. Average wait time is 3 minutes."
+        print(f"[slack-escalation] {e}")
+    return "I'm connecting you with a human agent right now. Average wait time is under 3 minutes. They will have the full context of our conversation."
+
 
 TOOL_MAP = {
     "search_knowledge_base": search_knowledge_base,
     "create_ticket": create_ticket,
-    "escalate_to_human": escalate_to_human
+    "send_purchase_email": send_purchase_email,
+    "escalate_to_human": escalate_to_human,
 }
 
-SYSTEM_BASE = """\
-You are {agent_name}, a warm and knowledgeable customer support specialist for {company_name}, a premium skincare brand.
+# ─────────────────────────────────────────────
+# SYSTEM PROMPT
+# ─────────────────────────────────────────────
 
-PERSONALITY: Polished, empathetic, and efficient. You represent a luxury brand — be warm but professional. Never rushed.
+SYSTEM_BASE = """\
+You are {agent_name}, a warm, knowledgeable customer support and sales specialist for {company_name}, a premium skincare brand.
+
+PERSONALITY: Polished, empathetic, and confident. You represent a luxury brand — be warm but professional. You are also a product expert who genuinely loves skincare and can make great recommendations.
 
 PROCESS:
-1. Greet the customer and understand their issue
-2. Search the knowledge base before answering anything
-3. If the FAQ answers it → give a clear, friendly answer and ask if it helped
-4. If the issue needs follow-up (no FAQ answer, complex issue, or customer requests it):
-   a. Tell the customer you'll create a ticket for them
-   b. Ask for their full name, email address, and order number (say "N/A" if not order-related)
-   c. Only call create_ticket once you have all three
-5. If the customer is frustrated or upset → escalate to a human immediately, do not wait
+1. Greet the customer and understand their need
+2. Always search the knowledge base before answering ANY question (products, prices, ingredients, policies, routines)
+3. For support issues: answer clearly and ask if it resolved their concern. If not, collect name + email + order number then create_ticket.
+4. For product questions: recommend confidently based on skin type, concern, and budget. If they want to buy, collect name + email then use send_purchase_email.
+5. If the customer is frustrated or upset → escalate_to_human immediately.
 
-RULES:
-- Never make up product information — always search first
-- Keep replies concise — 2-4 sentences unless explaining a complex issue
-- Always confirm the customer's email back to them before submitting a ticket
-- Use the customer's name once you have it
-- Never ask for payment details or passwords
+TICKET RULES:
+- Never call create_ticket until you have: full name, email, and order number (or confirmed N/A)
+- Always read back their details before submitting and ask "Does everything look correct?"
+- After ticket is created, tell them they'll receive a confirmation email
+
+PURCHASE RULES:
+- When a customer wants to buy a product, ask for their name and email only (no order number needed)
+- Use send_purchase_email — NOT create_ticket — for purchases
+- Confirm what they're buying and the price before sending
+
+PRODUCT EXPERTISE:
+- You know every product in the catalogue including SKU, price, ingredients, and skin type suitability
+- Make confident recommendations based on skin type and concerns
+- Suggest complementary products and routines
+- Mention current bundles if relevant
 
 QUICK REPLY SUGGESTIONS:
-After answering a question (not while collecting name/email/order number), add a final line with 2–4 short clickable options:
-QUICK_REPLIES: Option one | Option two | Option three
-Keep each option under 32 characters. Make them specific to what the customer just asked about.
-Examples:
-- After a shipping question: QUICK_REPLIES: Track my order | Shipping costs | International shipping
-- After a returns question: QUICK_REPLIES: Start a return | Refund timeline | Exchange an item
-- After a product question: QUICK_REPLIES: Full ingredients list | Recommended routine | Order now
-- After greeting/intro: QUICK_REPLIES: Track my order | Return a product | Product advice | Speak to a human
+After each response (except while collecting customer details), add a line:
+QUICK_REPLIES: Short option | Short option | Short option
+Keep each under 32 characters. Match them to the topic just discussed.
+Examples by topic:
+- Shipping: QUICK_REPLIES: Track my order | Express shipping | Free shipping info
+- Returns: QUICK_REPLIES: Start a return | Refund timeline | Exchange an item
+- Product advice: QUICK_REPLIES: View full routine | Check ingredients | I'd like to buy this
+- After ticket: QUICK_REPLIES: Ask another question | Track my order | Speak to a human
+- After purchase email: QUICK_REPLIES: Ask about ingredients | Build my routine | More products
 {kb_section}"""
 
 
 def build_system_prompt() -> str:
     agent_name = os.getenv("AGENT_NAME", "Alex")
-    company_name = os.getenv("COMPANY_NAME", "SupportAI")
+    company_name = os.getenv("COMPANY_NAME", "Lumière")
     _, kb_content = get_active_document()
     if kb_content:
         kb_section = f"\nKNOWLEDGE BASE:\n{kb_content}"
     else:
-        kb_section = "\nNo knowledge base is loaded. Use the search tool and rely on general support best practices."
+        kb_section = "\nNo knowledge base loaded. Use general skincare knowledge and support best practices."
     return SYSTEM_BASE.format(agent_name=agent_name, company_name=company_name, kb_section=kb_section)
+
+# ─────────────────────────────────────────────
+# ROUTES
+# ─────────────────────────────────────────────
 
 @app.route("/health")
 def health():
@@ -161,14 +252,19 @@ def health():
 
 @app.route("/")
 def index():
-    sid = str(uuid.uuid4())
-    session["id"] = sid
-    conversations[sid] = []
+    # Reuse existing session if valid, create new one otherwise
+    sid = session.get("id")
+    if not sid or sid not in conversations:
+        sid = str(uuid.uuid4())
+        session["id"] = sid
+        session.permanent = True
+        conversations[sid] = []
     return render_template(
         "index.html",
-        company_name=os.getenv("COMPANY_NAME", "SupportAI"),
+        company_name=os.getenv("COMPANY_NAME", "Lumière"),
         agent_name=os.getenv("AGENT_NAME", "Alex"),
     )
+
 
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -176,13 +272,14 @@ def chat():
     if not sid or sid not in conversations:
         sid = str(uuid.uuid4())
         session["id"] = sid
+        session.permanent = True
         conversations[sid] = []
     history = conversations[sid]
 
     user_message = request.json.get("message", "")
     history.append({"role": "user", "content": user_message})
 
-    for _ in range(6):
+    for _ in range(8):
         response = client.messages.create(
             model="claude-sonnet-4-6",
             max_tokens=1024,
@@ -192,9 +289,8 @@ def chat():
         )
 
         if response.stop_reason == "end_turn":
-            reply = next(b.text for b in response.content if hasattr(b, "text"))
+            reply = next((b.text for b in response.content if hasattr(b, "text")), "")
             history.append({"role": "assistant", "content": reply})
-            # Parse and strip QUICK_REPLIES from the reply
             suggestions = []
             clean_lines = []
             for line in reply.splitlines():
@@ -219,11 +315,12 @@ def chat():
                     })
             history.append({"role": "user", "content": tool_results})
 
-    return jsonify({"reply": "I'm having trouble right now. Please try again."})
+    return jsonify({"reply": "I'm having a little trouble right now. Please try again or contact us at support@lumiereskin.com.", "suggestions": []})
 
-ticket_log = []  # list of dicts: {ticket_id, issue, priority, timestamp}
-escalation_log = []  # list of dicts: {reason, timestamp}
 
+# ─────────────────────────────────────────────
+# ADMIN
+# ─────────────────────────────────────────────
 
 def _admin_authed() -> bool:
     return session.get("admin") is True
@@ -235,6 +332,7 @@ def admin():
         password = request.form.get("password", "")
         if password == os.getenv("ADMIN_PASSWORD", "admin"):
             session["admin"] = True
+            session.permanent = True
         else:
             flash("Incorrect password.")
         return redirect(url_for("admin"))
@@ -250,7 +348,7 @@ def admin():
         escalation_log=escalation_log,
         kb_filename=filename,
         kb_preview=kb_content[:500] if kb_content else None,
-        company_name=os.getenv("COMPANY_NAME", "SupportAI"),
+        company_name=os.getenv("COMPANY_NAME", "Lumière"),
     )
 
 
@@ -275,7 +373,7 @@ def admin_upload():
     save_path = os.path.join(DOCS_DIR, filename)
     file.save(save_path)
     try:
-        load_document(save_path)  # validate it parses correctly
+        load_document(save_path)
         set_active_document(filename)
         flash(f"Knowledge base updated: {filename}")
     except Exception as e:
