@@ -6,7 +6,8 @@ import anthropic
 import os
 import uuid
 
-load_dotenv(os.path.join(os.path.dirname(__file__), ".env"), override=True)
+_env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")
+load_dotenv(_env_path, override=True)
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", os.urandom(24).hex())
@@ -130,6 +131,11 @@ def build_system_prompt() -> str:
     else:
         kb_section = "\nNo knowledge base is loaded. Use the search tool and rely on general support best practices."
     return SYSTEM_BASE.format(agent_name=agent_name, company_name=company_name, kb_section=kb_section)
+
+@app.route("/health")
+def health():
+    return jsonify({"status": "ok"}), 200
+
 
 @app.route("/")
 def index():
