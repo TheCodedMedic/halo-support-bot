@@ -15,14 +15,15 @@ def _get_sheet():
         "https://www.googleapis.com/auth/drive",
     ]
 
-    creds_path = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON")
-    if not creds_path or not os.path.exists(creds_path):
-        raise RuntimeError(
-            "GOOGLE_SERVICE_ACCOUNT_JSON is not set or file not found. "
-            "Set it to the path of your service account JSON file."
-        )
-
-    creds = Credentials.from_service_account_file(creds_path, scopes=scopes)
+    # Prefer inline JSON content (Railway/cloud) over file path (local dev)
+    json_content = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON_CONTENT")
+    if json_content:
+        creds = Credentials.from_service_account_info(json.loads(json_content), scopes=scopes)
+    else:
+        creds_path = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON")
+        if not creds_path or not os.path.exists(creds_path):
+            raise RuntimeError("No Google credentials found. Set GOOGLE_SERVICE_ACCOUNT_JSON_CONTENT or GOOGLE_SERVICE_ACCOUNT_JSON.")
+        creds = Credentials.from_service_account_file(creds_path, scopes=scopes)
     gc = gspread.authorize(creds)
     sheet_id = os.getenv("GOOGLE_SHEET_ID")
     if not sheet_id:
