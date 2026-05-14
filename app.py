@@ -131,6 +131,16 @@ RULES:
 - Always confirm the customer's email back to them before submitting a ticket
 - Use the customer's name once you have it
 - Never ask for payment details or passwords
+
+QUICK REPLY SUGGESTIONS:
+After answering a question (not while collecting name/email/order number), add a final line with 2–4 short clickable options:
+QUICK_REPLIES: Option one | Option two | Option three
+Keep each option under 32 characters. Make them specific to what the customer just asked about.
+Examples:
+- After a shipping question: QUICK_REPLIES: Track my order | Shipping costs | International shipping
+- After a returns question: QUICK_REPLIES: Start a return | Refund timeline | Exchange an item
+- After a product question: QUICK_REPLIES: Full ingredients list | Recommended routine | Order now
+- After greeting/intro: QUICK_REPLIES: Track my order | Return a product | Product advice | Speak to a human
 {kb_section}"""
 
 
@@ -184,7 +194,17 @@ def chat():
         if response.stop_reason == "end_turn":
             reply = next(b.text for b in response.content if hasattr(b, "text"))
             history.append({"role": "assistant", "content": reply})
-            return jsonify({"reply": reply})
+            # Parse and strip QUICK_REPLIES from the reply
+            suggestions = []
+            clean_lines = []
+            for line in reply.splitlines():
+                if line.strip().startswith("QUICK_REPLIES:"):
+                    raw = line.replace("QUICK_REPLIES:", "").strip()
+                    suggestions = [s.strip() for s in raw.split("|") if s.strip()]
+                else:
+                    clean_lines.append(line)
+            clean_reply = "\n".join(clean_lines).strip()
+            return jsonify({"reply": clean_reply, "suggestions": suggestions})
 
         if response.stop_reason == "tool_use":
             history.append({"role": "assistant", "content": response.content})
