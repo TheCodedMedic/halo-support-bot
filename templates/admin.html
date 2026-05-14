@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin — SupportAI</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, sans-serif; background: #f0f2f5; min-height: 100vh; }
+
+    /* Login screen */
+    .login-wrap { display: flex; align-items: center; justify-content: center; height: 100vh; }
+    .login-card { background: white; border-radius: 16px; padding: 40px; width: 360px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+    .login-card h2 { margin-bottom: 6px; color: #1a1a2e; }
+    .login-card p { color: #666; font-size: 14px; margin-bottom: 24px; }
+    .login-card input { width: 100%; padding: 10px 14px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; margin-bottom: 12px; outline: none; }
+    .login-card input:focus { border-color: #1a1a2e; }
+    .btn { background: #1a1a2e; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-size: 14px; cursor: pointer; transition: opacity 0.2s; }
+    .btn:hover { opacity: 0.85; }
+    .btn-outline { background: white; color: #1a1a2e; border: 1.5px solid #1a1a2e; }
+    .btn-green { background: #16a34a; }
+    .btn-sm { padding: 7px 14px; font-size: 13px; }
+    .error { background: #fef2f2; color: #dc2626; padding: 10px 14px; border-radius: 8px; font-size: 13px; margin-bottom: 12px; }
+
+    /* Dashboard */
+    .topbar { background: #1a1a2e; color: white; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
+    .topbar h1 { font-size: 18px; }
+    .topbar a { color: rgba(255,255,255,0.6); font-size: 13px; text-decoration: none; }
+    .topbar a:hover { color: white; }
+    .container { max-width: 900px; margin: 32px auto; padding: 0 24px; display: flex; flex-direction: column; gap: 24px; }
+
+    .card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .card h2 { font-size: 15px; color: #1a1a2e; margin-bottom: 16px; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+
+    /* Stats row */
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .stat { background: #f8f9fa; border-radius: 10px; padding: 20px; text-align: center; }
+    .stat .number { font-size: 32px; font-weight: 700; color: #1a1a2e; }
+    .stat .label { font-size: 13px; color: #666; margin-top: 4px; }
+
+    /* Upload */
+    .upload-row { display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap; }
+    .upload-row input[type="file"] { flex: 1; padding: 8px; border: 1.5px dashed #ccc; border-radius: 8px; font-size: 13px; min-width: 200px; }
+    .demo-btn-wrap { display: flex; align-items: center; gap: 8px; }
+    .separator { color: #aaa; font-size: 13px; }
+    .kb-preview { background: #f8f9fa; border-radius: 8px; padding: 14px; font-size: 12px; font-family: monospace; color: #444; white-space: pre-wrap; margin-top: 12px; max-height: 140px; overflow-y: auto; }
+    .kb-label { font-size: 12px; color: #888; margin-top: 12px; margin-bottom: 4px; }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; padding: 8px 10px; color: #888; font-weight: 500; border-bottom: 1px solid #f0f0f0; }
+    td { padding: 8px 10px; border-bottom: 1px solid #f8f8f8; color: #333; }
+    tr:last-child td { border-bottom: none; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
+    .badge-urgent { background: #fef2f2; color: #dc2626; }
+    .badge-high   { background: #fff7ed; color: #ea580c; }
+    .badge-normal { background: #f0fdf4; color: #16a34a; }
+    .badge-low    { background: #f8f9fa; color: #666; }
+    .empty { color: #aaa; font-size: 13px; text-align: center; padding: 20px; }
+
+    .flash { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; padding: 10px 16px; border-radius: 8px; font-size: 13px; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+
+{% if not authenticated %}
+<div class="login-wrap">
+  <div class="login-card">
+    <h2>Admin Login</h2>
+    <p>SupportAI dashboard — restricted access</p>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for msg in messages %}<div class="error">{{ msg }}</div>{% endfor %}
+      {% endif %}
+    {% endwith %}
+    <form method="POST">
+      <input type="password" name="password" placeholder="Password" autofocus/>
+      <button class="btn" type="submit" style="width:100%">Sign in</button>
+    </form>
+  </div>
+</div>
+
+{% else %}
+<div class="topbar">
+  <h1>{{ company_name }} — Admin</h1>
+  <a href="/admin/logout">Sign out</a>
+</div>
+
+<div class="container">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for msg in messages %}<div class="flash">{{ msg }}</div>{% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <!-- Stats -->
+  <div class="card">
+    <h2>Overview</h2>
+    <div class="stats">
+      <div class="stat">
+        <div class="number">{{ ticket_log | length }}</div>
+        <div class="label">Tickets created</div>
+      </div>
+      <div class="stat">
+        <div class="number">{{ escalation_log | length }}</div>
+        <div class="label">Escalations</div>
+      </div>
+      <div class="stat">
+        <div class="number">{{ ticket_log | selectattr("priority", "in", ["high", "urgent"]) | list | length }}</div>
+        <div class="label">High / Urgent tickets</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Knowledge base -->
+  <div class="card">
+    <h2>Knowledge Base</h2>
+    <div class="upload-row">
+      <form method="POST" action="/admin/upload" enctype="multipart/form-data" style="display:flex;gap:10px;flex:1;align-items:center;flex-wrap:wrap">
+        <input type="file" name="document" accept=".pdf,.txt"/>
+        <button class="btn btn-sm" type="submit">Upload</button>
+      </form>
+      <div class="demo-btn-wrap">
+        <span class="separator">or</span>
+        <form method="POST" action="/admin/load-demo">
+          <button class="btn btn-sm btn-green" type="submit">Load Demo FAQ</button>
+        </form>
+      </div>
+    </div>
+    {% if kb_filename %}
+      <div class="kb-label">Currently loaded: <strong>{{ kb_filename }}</strong></div>
+      {% if kb_preview %}
+        <div class="kb-preview">{{ kb_preview }}{% if kb_preview | length == 500 %}…{% endif %}</div>
+      {% endif %}
+    {% else %}
+      <div class="kb-label" style="color:#dc2626">No knowledge base loaded. Upload a document or click Load Demo FAQ.</div>
+    {% endif %}
+  </div>
+
+  <!-- Tickets -->
+  <div class="card">
+    <h2>Recent Tickets</h2>
+    {% if ticket_log %}
+      <table>
+        <thead><tr><th>Ticket ID</th><th>Priority</th><th>Issue</th><th>Time</th></tr></thead>
+        <tbody>
+          {% for t in ticket_log | reverse %}
+          <tr>
+            <td>{{ t.ticket_id }}</td>
+            <td><span class="badge badge-{{ t.priority }}">{{ t.priority }}</span></td>
+            <td>{{ t.issue[:80] }}{% if t.issue | length > 80 %}…{% endif %}</td>
+            <td>{{ t.timestamp }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <div class="empty">No tickets yet.</div>
+    {% endif %}
+  </div>
+
+  <!-- Escalations -->
+  <div class="card">
+    <h2>Recent Escalations</h2>
+    {% if escalation_log %}
+      <table>
+        <thead><tr><th>Reason</th><th>Time</th></tr></thead>
+        <tbody>
+          {% for e in escalation_log | reverse %}
+          <tr>
+            <td>{{ e.reason[:120] }}{% if e.reason | length > 120 %}…{% endif %}</td>
+            <td>{{ e.timestamp }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <div class="empty">No escalations yet.</div>
+    {% endif %}
+  </div>
+
+</div>
+{% endif %}
+
+</body>
+</html>

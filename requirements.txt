@@ -1,0 +1,9 @@
+flask
+anthropic
+python-dotenv
+pypdf
+gspread
+google-auth
+resend
+requests
+werkzeug

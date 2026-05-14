@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ company_name }} Support</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+    }
+
+    .chat-container {
+      width: 100%;
+      max-width: 460px;
+      height: 90vh;
+      max-height: 680px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.14);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      background: #1a1a2e;
+      color: white;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      background: #4ade80;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .header-info h3 { font-size: 15px; font-weight: 600; }
+    .header-info p  { font-size: 12px; opacity: 0.65; margin-top: 3px; }
+    .online-dot {
+      width: 7px; height: 7px;
+      background: #4ade80;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 5px;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      scroll-behavior: smooth;
+    }
+
+    .message-row {
+      display: flex;
+      flex-direction: column;
+      max-width: 82%;
+    }
+    .message-row.user { align-self: flex-end; align-items: flex-end; }
+    .message-row.bot  { align-self: flex-start; align-items: flex-start; }
+
+    .message {
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.55;
+      word-break: break-word;
+    }
+    .message-row.bot  .message { background: #f0f2f5; color: #1a1a2e; border-bottom-left-radius: 4px; }
+    .message-row.user .message { background: #1a1a2e; color: white; border-bottom-right-radius: 4px; }
+
+    /* Markdown content inside bot bubbles */
+    .message p { margin: 0 0 6px; }
+    .message p:last-child { margin-bottom: 0; }
+    .message ul, .message ol { padding-left: 18px; margin: 4px 0; }
+    .message strong { font-weight: 600; }
+
+    .timestamp {
+      font-size: 11px;
+      color: #aaa;
+      margin-top: 3px;
+      padding: 0 4px;
+    }
+
+    /* Spacing between message groups */
+    .message-row + .message-row { margin-top: 8px; }
+
+    .typing {
+      display: none;
+      align-items: center;
+      gap: 4px;
+      padding: 10px 14px;
+      background: #f0f2f5;
+      border-radius: 16px;
+      border-bottom-left-radius: 4px;
+      width: fit-content;
+      margin-top: 8px;
+    }
+    .typing span {
+      width: 7px; height: 7px;
+      background: #aaa;
+      border-radius: 50%;
+      animation: bounce 1s infinite;
+    }
+    .typing span:nth-child(2) { animation-delay: 0.15s; }
+    .typing span:nth-child(3) { animation-delay: 0.3s; }
+    @keyframes bounce {
+      0%,60%,100% { transform: translateY(0); }
+      30%          { transform: translateY(-6px); }
+    }
+
+    .chat-input {
+      padding: 14px 16px;
+      border-top: 1px solid #eee;
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px 16px;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 24px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .chat-input input:focus { border-color: #1a1a2e; }
+    .chat-input button {
+      background: #1a1a2e;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .chat-input button:hover { opacity: 0.85; }
+    .chat-input button:disabled { opacity: 0.45; cursor: default; }
+
+    @media (max-width: 500px) {
+      body { padding: 0; align-items: flex-end; }
+      .chat-container { border-radius: 20px 20px 0 0; height: 95vh; max-height: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="avatar">🤖</div>
+      <div class="header-info">
+        <h3>{{ agent_name }} — {{ company_name }} Support</h3>
+        <p><span class="online-dot"></span>Online now</p>
+      </div>
+    </div>
+
+    <div class="chat-messages" id="messages">
+      <div class="message-row bot">
+        <div class="message">Hi! I'm {{ agent_name }} from {{ company_name }} support. How can I help you today?</div>
+        <div class="timestamp" id="init-time"></div>
+      </div>
+      <div class="typing" id="typing">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="chat-input">
+      <input type="text" id="input" placeholder="Type your message…"
+             onkeydown="if(event.key==='Enter' && !event.shiftKey) sendMessage()"/>
+      <button id="send-btn" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("init-time").textContent = formatTime(new Date());
+
+    function formatTime(date) {
+      return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById("input");
+      const btn   = document.getElementById("send-btn");
+      const message = input.value.trim();
+      if (!message) return;
+
+      input.value = "";
+      input.disabled = true;
+      btn.disabled = true;
+
+      addMessage(message, "user");
+      showTyping(true);
+
+      try {
+        const res = await fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message }),
+        });
+        const data = await res.json();
+        showTyping(false);
+        addMessage(data.reply, "bot");
+      } catch {
+        showTyping(false);
+        addMessage("Something went wrong. Please try again.", "bot");
+      } finally {
+        input.disabled = false;
+        btn.disabled = false;
+        input.focus();
+      }
+    }
+
+    function addMessage(text, type) {
+      const messages = document.getElementById("messages");
+      const typing   = document.getElementById("typing");
+
+      const row = document.createElement("div");
+      row.className = `message-row ${type}`;
+
+      const bubble = document.createElement("div");
+      bubble.className = "message";
+      if (type === "bot") {
+        bubble.innerHTML = marked.parse(text);
+      } else {
+        bubble.textContent = text;
+      }
+
+      const ts = document.createElement("div");
+      ts.className = "timestamp";
+      ts.textContent = formatTime(new Date());
+
+      row.appendChild(bubble);
+      row.appendChild(ts);
+      messages.insertBefore(row, typing);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function showTyping(show) {
+      const el = document.getElementById("typing");
+      el.style.display = show ? "flex" : "none";
+      if (show) document.getElementById("messages").scrollTop = 9999;
+    }
+  </script>
+</body>
+</html>

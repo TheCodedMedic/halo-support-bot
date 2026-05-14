@@ -1,0 +1,19 @@
+# Environment & secrets
+.env
+*.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.Python
+venv/
+env/
+.env/
+
+# Uploaded docs (keep folder, not contents)
+docs/*
+!docs/.gitkeep
+
+# macOS
+.DS_Store
