@@ -6,7 +6,6 @@ from datetime import datetime, timedelta
 import anthropic
 import os
 import uuid
-import threading
 
 _env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")
 load_dotenv(_env_path, override=True)
@@ -96,55 +95,47 @@ def create_ticket(issue: str, priority: str = "normal", category: str = "General
         "order_number": order_number,
         "timestamp": datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC"),
     })
-
-    def _fire():
-        try:
-            from integrations.sheets import log_ticket
-            log_ticket(ticket_id, issue, priority, customer_name, customer_email, order_number, category)
-        except Exception as e:
-            print(f"[sheets] {e}")
-        try:
-            from integrations.email_notify import send_ticket_email
-            send_ticket_email(ticket_id, issue, priority, customer_name, customer_email, order_number)
-        except Exception as e:
-            print(f"[email-owner] {e}")
-        try:
-            from integrations.email_notify import send_customer_confirmation_email
-            send_customer_confirmation_email(ticket_id, issue, priority, customer_name, customer_email)
-        except Exception as e:
-            print(f"[email-customer] {e}")
-        try:
-            from integrations.slack_alert import send_ticket_alert
-            send_ticket_alert(ticket_id, issue, priority, customer_name, customer_email, order_number)
-        except Exception as e:
-            print(f"[slack-ticket] {e}")
-
-    threading.Thread(target=_fire, daemon=True).start()
+    try:
+        from integrations.sheets import log_ticket
+        log_ticket(ticket_id, issue, priority, customer_name, customer_email, order_number, category)
+    except Exception as e:
+        print(f"[sheets] {e}")
+    try:
+        from integrations.email_notify import send_ticket_email
+        send_ticket_email(ticket_id, issue, priority, customer_name, customer_email, order_number)
+    except Exception as e:
+        print(f"[email-owner] {e}")
+    try:
+        from integrations.email_notify import send_customer_confirmation_email
+        send_customer_confirmation_email(ticket_id, issue, priority, customer_name, customer_email)
+    except Exception as e:
+        print(f"[email-customer] {e}")
+    try:
+        from integrations.slack_alert import send_ticket_alert
+        send_ticket_alert(ticket_id, issue, priority, customer_name, customer_email, order_number)
+    except Exception as e:
+        print(f"[slack-ticket] {e}")
     return f"Ticket {ticket_id} created. Confirmation email sent to {customer_email}. Our team will respond within 24 hours."
 
 
 def send_purchase_email(customer_name: str, customer_email: str, product_name: str,
                         product_price: str, product_sku: str, product_description: str = "") -> str:
     ref_id = f"PUR-{str(uuid.uuid4())[:6].upper()}"
-
-    def _fire():
-        try:
-            from integrations.email_notify import send_purchase_email as _send_purchase
-            _send_purchase(customer_name, customer_email, product_name, product_price, product_sku, product_description)
-        except Exception as e:
-            print(f"[email-purchase] {e}")
-        try:
-            from integrations.slack_alert import send_purchase_alert
-            send_purchase_alert(customer_name, customer_email, product_name, product_price, product_sku)
-        except Exception as e:
-            print(f"[slack-purchase] {e}")
-        try:
-            from integrations.sheets import log_purchase
-            log_purchase(ref_id, customer_name, customer_email, product_name, product_price, product_sku)
-        except Exception as e:
-            print(f"[sheets-purchase] {e}")
-
-    threading.Thread(target=_fire, daemon=True).start()
+    try:
+        from integrations.email_notify import send_purchase_email as _send_purchase
+        _send_purchase(customer_name, customer_email, product_name, product_price, product_sku, product_description)
+    except Exception as e:
+        print(f"[email-purchase] {e}")
+    try:
+        from integrations.slack_alert import send_purchase_alert
+        send_purchase_alert(customer_name, customer_email, product_name, product_price, product_sku)
+    except Exception as e:
+        print(f"[slack-purchase] {e}")
+    try:
+        from integrations.sheets import log_purchase
+        log_purchase(ref_id, customer_name, customer_email, product_name, product_price, product_sku)
+    except Exception as e:
+        print(f"[sheets-purchase] {e}")
     return f"Purchase email sent to {customer_email} for {product_name}. Reference: {ref_id}."
 
 
@@ -153,15 +144,11 @@ def escalate_to_human(reason: str) -> str:
         "reason": reason,
         "timestamp": datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC"),
     })
-
-    def _fire():
-        try:
-            from integrations.slack_alert import send_escalation_alert
-            send_escalation_alert(reason)
-        except Exception as e:
-            print(f"[slack-escalation] {e}")
-
-    threading.Thread(target=_fire, daemon=True).start()
+    try:
+        from integrations.slack_alert import send_escalation_alert
+        send_escalation_alert(reason)
+    except Exception as e:
+        print(f"[slack-escalation] {e}")
     return "I'm connecting you with a human agent right now. They will have the full context of our conversation."
 
 
