@@ -14,6 +14,7 @@ env/
 # Uploaded docs (keep folder, not contents)
 docs/*
 !docs/.gitkeep
+!docs/sample_faq.txt
 
 # macOS
 .DS_Store
