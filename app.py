@@ -298,13 +298,20 @@ def chat():
 
         history.append({"role": "user", "content": user_message})
 
+        # Keep only the last 10 messages to prevent token blowup
+        trimmed = history[-10:] if len(history) > 10 else history
+
         for _ in range(8):
             response = client.messages.create(
                 model="claude-sonnet-4-6",
                 max_tokens=1024,
-                system=build_system_prompt(),
+                system=[{
+                    "type": "text",
+                    "text": build_system_prompt(),
+                    "cache_control": {"type": "ephemeral"}
+                }],
                 tools=TOOLS,
-                messages=history
+                messages=trimmed
             )
 
             if response.stop_reason == "end_turn":
@@ -345,6 +352,9 @@ def chat():
 
         return jsonify({"reply": "I'm having a little trouble right now. Please try again or contact us at support@lumiereskin.com.", "suggestions": []})
 
+    except anthropic.RateLimitError:
+        print("[chat] rate limit hit — too many tokens per minute")
+        return jsonify({"reply": "I'm receiving a lot of messages right now — please give me a moment and try again.", "suggestions": []}), 200
     except Exception as e:
         print(f"[chat] unhandled error: {e}")
         import traceback; traceback.print_exc()
