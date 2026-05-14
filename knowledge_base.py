@@ -31,18 +31,35 @@ def load_document(path: str) -> str:
 
 
 def get_active_document() -> tuple[str | None, str | None]:
-    """Return (filename, content) of the currently loaded knowledge base, or (None, None)."""
-    if not os.path.exists(ACTIVE_DOC_PATH):
-        return None, None
-    with open(ACTIVE_DOC_PATH, "r") as f:
-        filename = f.read().strip()
-    doc_path = os.path.join(DOCS_DIR, filename)
-    if not os.path.exists(doc_path):
-        return None, None
-    try:
-        return filename, load_document(doc_path)
-    except Exception:
-        return None, None
+    """Return (filename, content) of the currently active knowledge base.
+
+    Priority:
+    1. ACTIVE_DOCUMENT env var — survives all redeploys (use on Railway)
+    2. .active_doc pointer file — set via admin panel
+    3. None — no knowledge base loaded
+    """
+    # 1. Environment variable takes priority — always works after redeploy
+    env_doc = os.getenv("ACTIVE_DOCUMENT")
+    if env_doc:
+        doc_path = os.path.join(DOCS_DIR, env_doc)
+        if os.path.exists(doc_path):
+            try:
+                return env_doc, load_document(doc_path)
+            except Exception:
+                pass
+
+    # 2. Fall back to the .active_doc pointer file (set via admin panel)
+    if os.path.exists(ACTIVE_DOC_PATH):
+        with open(ACTIVE_DOC_PATH, "r") as f:
+            filename = f.read().strip()
+        doc_path = os.path.join(DOCS_DIR, filename)
+        if os.path.exists(doc_path):
+            try:
+                return filename, load_document(doc_path)
+            except Exception:
+                pass
+
+    return None, None
 
 
 def set_active_document(filename: str) -> None:
