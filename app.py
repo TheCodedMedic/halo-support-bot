@@ -98,7 +98,7 @@ def search_knowledge_base(query: str) -> str:
     lines = [l for l in content.splitlines() if query_lower in l.lower()]
     if lines:
         return "\n".join(lines)
-    return content
+    return "No exact match found. Try rephrasing or ask the customer for more details."
 
 
 def create_ticket(issue: str, priority: str = "normal", category: str = "General",
